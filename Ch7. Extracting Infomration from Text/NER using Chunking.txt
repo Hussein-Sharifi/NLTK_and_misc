@@ -1,0 +1,8 @@
+Noun Phrase Chunking:
+--------------------
+
+Example: "the market for system-management software for Digital's hardware" is a single noun phrase (containing two
+nested noun phrases). Chunking usually picks us smaller patterns defined by strings of POS tags, such as DET NN and 
+NN NN.
+
+Let's create a chunk grammar

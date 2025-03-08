@@ -1,0 +1,8 @@
+Say we want a store of information regarding hypernyms. We'll need to be creative
+
+import nltk
+from nltk.corpus import brown
+hobbies_learned = nltk.Text(brown.words(categories= ["hobbies", "learned"]))
+hobbies_learned.findall('<\w*> <and> <other> <\w*s>')
+
+we get, for example: water and other liquids. Note liquid is a hypernym of water. Using a combination of automatic and manual search, we can create a useful corpus.

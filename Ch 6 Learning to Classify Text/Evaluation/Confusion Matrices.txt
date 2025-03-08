@@ -1,0 +1,3 @@
+When we have 3+ labels, analyzing data using a confusion matrix can be helpful to spot errors. Confusion matrices
+are made such that each cell [i,j] indicates how often label j was predicted when the correct label was i. Note
+that diagonal entries represent correct predictions

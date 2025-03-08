@@ -1,0 +1,4 @@
+*[w for (_,w) in pairs]: 
+
+The underscore is just a regular Python variable, but we can use underscore by convention to indicate that we will not use its value.
+

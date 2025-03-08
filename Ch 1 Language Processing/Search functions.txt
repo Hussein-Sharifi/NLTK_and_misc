@@ -1,0 +1,31 @@
+imports needed: from nltk.book import *
+		import matplotlib as plot
+
+These require file type Text. use nltk.text.Text(word text) to convert.
+textname.concordance("word"): every occurrence of 'word' with some context.
+
+textname.similar("word"): words that occur in a syntactically similar environment to 'word'
+
+textname.common_contexts(["word1", "word2"]): shows contexts shared by word1 and word2
+
+*textname.dispersion_plot(['word1', 'word2', 'word3']): creates a plot showing where each word appears relative to beginning and end of book. 
+*to show plot: plot.pyplot.show()
+
+len(textname) shows number of tokens.
+
+textname.count('word') returns number of occurrences of word.
+
+fd = FreqDist(text) creates a special class type with 2-tuples: (token, no of occurrences)
+fd.most_common(n) returns n tokens with most occurrences
+fd[token] returns no of occurrences of token.
+fd.hapaxes() returns tokens that only occur once
+fd.max() returns object with highest occurrences
+fd.freq(object) returns probability of object out of all
+
+
+list(bigrams(['word1', 'word2', ....])) takes a list of words, then creates a 2-tuple for each pair, and compiles that into a list: [(word1, word2), (word2, word3), ....]. ie a list of bigrams
+
+textname.collocations() returns two-word phrases corresponding to the most frequent bigrams of unusual words. great way to glean from a text
+
+in conditional: if "z" in "minimize" 
+

@@ -1,0 +1,27 @@
+Similar to Naive Bayes, but instead of maximizing the label likelihood, we maximize probabilities of all labels
+given a set of features. This is called the TOTAL LIKELIHOOD:
+
+		P(features) = Σx |in| corpus P(label(x)|features(x))
+
+thus maximizing the probability of the label for each entry x in the corpus 
+
+
+P(label|features) for each input x is defined as:
+
+		P(label|features) = P(label, features) / Σlabel P(label, features)
+
+
+
+
+
+
+This classifier does not assume independence. It can be complicated to work out the parameters, so it starts off with
+randomized parameter weights, and then uses an iterative process that's guaranteed to improve total likelihood
+_____________________________________________________________________________________________________________________
+
+Practical stuff
+---------------
+
+*Some iterative optimization techniques are much faster than others. When training Maximum Entropy models, avoid the
+use of Generalized Iterative Scaling (GIS) or Improved Iterative Scaling (IIS), which are both considerably slower 
+than the Conjugate Gradient (CG) and the BFGS optimization methods.

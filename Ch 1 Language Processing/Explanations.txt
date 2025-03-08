@@ -1,0 +1,60 @@
+Tokenization: lots of ways to tokenize. Based on word, based on sentence, based on whitespaces.
+
+Once tokenized, you can count number of distinct tokens by turning text into a set, which eliminates duplicates. Then len(set).
+
+
+
+Let's make a function to calculate diversity of text vs repeated words:
+def_lexical_diversity_percentage(text):
+	print(len(set(text))/len(text) * 100)
+
+
+	
+Let's make a list of words longer than 15:
+V = set(text)
+long_words = [w for w in V if len(w) > 15]
+sorted(long_words)
+
+now let's add a condition that said word occurs more than 10 times
+long_words = [w for w in V if len(w) > 15 and fdist[w] > 10]
+
+
+
+Make a frequency distribution plot of the length of words in a text:
+wlengthDist = FreqDist([len(w) for w in textname])
+
+
+
+Examples with for loops:
+for token in sent1:
+...     if token.islower():
+...         print(token, 'is a lowercase word')
+...     elif token.istitle():
+...         print(token, 'is a titlecase word')
+...     else:
+...         print(token, 'is punctuation')
+Call is a titlecase word
+me is a lowercase word
+Ishmael is a titlecase word
+. is punctuation
+
+tricky = sorted(w for w in set(text2) if 'cie' in w or 'cei' in w)
+>>> for word in tricky:
+...     print(word, end=' ')
+ancient ceiling conceit conceited conceive conscience
+conscientious conscientiously deceitful deceive ...
+
+
+Let's find total number of characters in a text:
+sum(len(w) for w in textname)
+
+
+
+
+
+
+
+
+
+
+

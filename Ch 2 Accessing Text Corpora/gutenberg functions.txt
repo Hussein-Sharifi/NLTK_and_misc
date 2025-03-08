@@ -1,0 +1,6 @@
+corpora functions:
+
+gutenberg.raw(text)
+.words
+.sents
+

@@ -1,0 +1,8 @@
+import random
+
+random.choice(): e.g. choice("aehh ") will produce one of four possible characters, with the letter h being twice as 												      frequent as the others
+random.shuffle(list): modifies list by randomly rearranging its items.
+
+random.sample( list, n ): returns randomly selected n terms from list
+
+

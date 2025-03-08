@@ -1,0 +1,66 @@
+defaultdict:
+
+*from collections import defaultdict; 
+d = defaultdict(list) will initialize so that for any key, d[key] = [].
+It will also convert all values to the assigned type.
+
+You can also use it to assign a default value to all 'empty' keys:
+>>>d = defaultdict(lambda: 'NOUN')
+>>>d['blog']
+'NOUN'
+_________________________________________________________________________________________________________________
+
+Applications:
+
+
+eg1:
+---
+*Many language processing tasks — including tagging — struggle to correctly process the hapaxes of a text. We can
+tag hapaxes as UNK and deal with them separately later:
+
+alice = nltk.corpus.gutenberg.words('carroll-alice.txt')
+vocab = [w for (w,_) in nltk.FreqDist(alice).most_common(1000)]
+mapping = defaultdict(lambda: 'UNK')
+for w in vocab:
+    mapping[w] = w
+
+alice2 = [mapping[w] for w in alice]
+
+eg2:
+----
+Let's use it count number of times a tag appears in a text:
+
+text = brown.tagged_words(categories = 'news', tagset = 'universal')
+count = defaultdict(int)
+for (word, tag) in text:
+    count[tag] += 1
+
+>>> count['NOUN']
+30640
+from operator import itemgetter
+sorted(count.items(), key = itemgetter(1), reverse = 'True')
+
+
+eg3:
+---
+Let's list words according to last two letters:
+
+last_letters = defaultdict(list)
+words = nltk.corpus.words.words('en')
+for w in words:
+    key = w[-2:]
+    last_letters[key].append(w)
+>>> last_letters['ly']
+['abactinally', 'abandonedly', 'abasedly', 'abashedly', 'abashlessly', 'abbreviately',
+'abdominally', 'abhorrently', 'abidingly', 'abiogenetically', 'abiologically', ...]
+
+eg4:
+----
+Use it to find anagrams:
+
+anagrams = defaultdict(list)
+words = nltk.corpus.words.words('en')
+for w in words:
+    key = ''.join(sorted(w))
+    anagrams[key].append(w)
+

@@ -1,0 +1,17 @@
+*Can assign tuples using just commas if there is no ambiguity
+*Lists are mutable. Tuples are not
+*empty tuple: t = ()
+
+*Can be used to compute multiple values in one line:
+>>>len(w), 5*20, text[5]
+(5, 100, ',')
+
+*tuple(list) converts list to tuple object
+
+*Using tuples to rearrange items in list:
+>>> words = ['I', 'turned', 'off', 'the', 'spectroroute']
+>>> words[2], words[3], words[4] = words[3], words[4], words[2]
+>>> words
+['I', 'turned', 'the', 'spectroroute', 'off']
+
+

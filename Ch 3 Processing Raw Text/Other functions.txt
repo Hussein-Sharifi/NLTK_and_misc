@@ -1,0 +1,18 @@
+Other functions
+
+
+input('optional prompt'): equivalent to scanf
+
+print('''triple quotes
+let you enter new lines
+using Enter''')
+
+you can change an entry in a list or delete them:
+list[0] = 'something else'
+del list[0]
+
+
+to separate lines in a text file:
+for line in file:
+	print(line.strip())
+

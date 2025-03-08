@@ -1,0 +1,37 @@
+WordNet functions and methods:
+
+wn.NOUN
+wn.VERB
+wn.all_synsets('n'/'v')
+wn.synsets(word) returns the whole synonym set.
+wn.synset('car.n.01') returns Synset type for that object (has to be specific)
+
+wn.lemma('car.n.01.automobile') returns Lemma type for that object (has to be even more specific) 
+ex: use wn.synset('car.n.01').lemmas() to find the specific names
+
+
+
+synset type has methods:
+name()
+lemmas()
+definition()
+lemma_names()
+examples()
+hyponyms()
+hypernyms()
+hypernym_paths(): this gives you a list of lists. Each list is a path that traces the entire path from the most abstract hypernym down.
+root_hypernyms()
+part/substance/member_meronyms/holonyms()
+entailments()
+antonyms()
+lowest_common_hypernyms(other synset)
+min_depth()
+path_similarity()
+shortest_path_distance(other synset)
+
+lemma type has methods:
+synset()
+name()
+
+
+nltk.app.wordnet()

@@ -1,0 +1,75 @@
+WordNet: like a thesaurus
+
+from nltk.corpus import wordnet as wn
+
+synset: synonym set. each word is associated with a synonym set of a particular meaning.
+
+lemma: To eliminate ambiguity, we will identify these words as car.n.01.automobile, car.n.01.motorcar, and so on. This pairing of a synset with a word is called a lemma
+
+These two relations navigate up and down the "is-a" hierarchy:
+hyponym: words that are immediate "children" connected to the concept of a given word (ex. S.U.V. is a hyponym of car)
+hypernyms: opposite of hyponym. the thing above it in abstraction
+
+meronyms, holonyms and entailments:
+from items to their components (meronyms) or to the things they are contained in (holonyms). For example, the parts of a tree are its trunk, crown, and so on; the part_meronyms(). The substance a tree is made of includes heartwood and sapwood; the substance_meronyms(). A collection of trees forms a forest; the member_holonyms()
+the act of walking involves the act of stepping, so walking entails stepping
+
+root hypernym: the most abstract hypernym
+
+
+
+>>> wn.synsets('motorcar')
+[Synset('car.n.01')]
+*this tells us the only possible meaning of motorcar is car
+
+to access synset with all synonyms:
+>>> wn.synset('car.n.01').lemma_names()
+['car', 'auto', 'automobile', 'machine', 'motorcar']
+
+>>> wn.synset('car.n.01').definition()
+'a motor vehicle with four wheels; usually propelled by an internal combustion engine'
+>>> wn.synset('car.n.01').examples()
+['he needs a car to get to work']
+
+
+>>> wn.synset('car.n.01').lemmas()
+[Lemma('car.n.01.car'), Lemma('car.n.01.auto'), Lemma('car.n.01.automobile'),
+Lemma('car.n.01.machine'), Lemma('car.n.01.motorcar')]
+>>> wn.lemma('car.n.01.automobile')
+Lemma('car.n.01.automobile')
+>>> wn.lemma('car.n.01.automobile').synset()
+Synset('car.n.01')
+>>> wn.lemma('car.n.01.automobile').name()
+'automobile'
+
+when using synsets: if a word has multiple possible meanings, we get multiple synsets:
+>>> wn.synsets('car')
+[Synset('car.n.01'), Synset('car.n.02'), Synset('car.n.03'), Synset('car.n.04'),
+Synset('cable_car.n.01')]
+>>> for synset in wn.synsets('car'):
+...     print(synset.lemma_names())
+...
+['car', 'auto', 'automobile', 'machine', 'motorcar']
+['car', 'railcar', 'railway_car', 'railroad_car']
+['car', 'gondola']
+['car', 'elevator_car']
+['cable_car', 'car']
+
+To get all the lemmas:
+>>> wn.lemmas('car')
+[Lemma('car.n.01.car'), Lemma('car.n.02.car'), Lemma('car.n.03.car'),
+Lemma('car.n.04.car'), Lemma('cable_car.n.01.car')]
+
+
+in this example, we extract all hyponyms, each hyponym is a synset type. then we find all the lemmas associated
+with that synset, and sort their names:
+>>> motorcar = wn.synset('car.n.01')
+>>> types_of_motorcar = motorcar.hyponyms()
+>>> sorted(lemma.name() for synset in types_of_motorcar for lemma in synset.lemmas())
+
+
+
+In this example, we only extract nouns:
+>>> for synset in wn.synsets('mint', wn.NOUN):
+...     print(synset.name() + ':', synset.definition())
+...

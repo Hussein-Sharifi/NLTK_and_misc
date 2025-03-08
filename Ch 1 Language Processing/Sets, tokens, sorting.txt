@@ -1,0 +1,18 @@
+set(___) turns into a set.
+
+sorted(object) sorts alphabetically. Capitalized tokens come before lower case.
+
+list.append(object) adds object to list
+
+list.index(object) returns index of first occurrence of object in list
+list[index no.] returns the object with the specified index.
+list[start index: end index] returns all objects within this range
+list[5:] returns objects from index 5 to end. Can similarly do list[:10] for first 10 objects.
+list[5] = 'new word' replaces object with index 5 with 'new word'
+list[1:3] = ['second', 'third'] replaces the entire slice. Since we only assigned two new words, index 3 is now blank and deleted. Next objects will slide to its place if there are any.
+list[-n] returns nth object counting from end
+
+'__'.join(['word1', 'word2', 'word3']) will join list into a single string, and between every object puts __
+string.split() converts string into list with objects based on whitespace
+
+

@@ -1,0 +1,12 @@
+Tokens: smallest units that a LLM recognizes and works with. Varies based on tokenization method.
+
+concatenation: combining two lists into one using addition for example.
+
+hapaxes: tokens that only occur once
+
+collocation: sequence of words that occur together frequently
+
+list comprehension: [f(x) for x in object]
+
+
+

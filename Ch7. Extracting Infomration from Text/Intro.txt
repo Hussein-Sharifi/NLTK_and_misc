@@ -1,0 +1,17 @@
+Goal is to extract information from text. Two strategies: 
+
+1. Construct a general representation of meaning and let the machine glean the required information from the text. 
+2. Convert the text from unstructured to structured data. Called INFOMRATION EXTRACTION. This is the topic of this
+chapter.
+
+Architecture:
+
+Sentence segmentation then tokenize words
+POS tagging ---> NE recognition
+Relation Detection to find relations between entities. 
+
+>>> def ie_preprocess(document):
+...    sentences = nltk.sent_tokenize(document) [1]
+...    sentences = [nltk.word_tokenize(sent) for sent in sentences] [2]
+...    sentences = [nltk.pos_tag(sent) for sent in sentences] [3]
+

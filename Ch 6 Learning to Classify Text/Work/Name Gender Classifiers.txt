@@ -1,0 +1,60 @@
+import nltk, random
+from nltk.corpus import names
+
+male = [ (n, 'male') for n in names.words('male.txt') ]
+female = [ (n, 'female') for n in names.words('female.txt') ] 
+
+random.shuffle(male); random.shuffle(female)
+
+train_index_M = int( len(male)* .874 )
+train_index_F = int( len(female)* .874 )
+
+test_index_M = int( (1 - .874) * len(male) / 2)  
+test_index_F = int( (1 - .874) * len(female) / 2)  
+
+train_names = male[:train_index_M] + female[:train_index_F] 
+devtest_names = male[train_index_M: -test_index_M] + female[train_index_F: -test_index_F]  
+test_names = male[-test_index_M: ] + female[-test_index_F: ]
+
+random.shuffle(train_names); random.shuffle(devtest_names); random.shuffle(test_names)
+
+def features(name):
+    double_consonants = False
+    prev_letter = '?'
+\
+    for c in name:
+        if c not in 'aeiouAEIOU' and c == prev_letter and double_consonants == False:
+             double_consonants = True
+        prev_letter = c
+\
+    featureset = {'last letter': name[-1:],
+                 'last two': name[-2:],
+                 'last three': name[-3:],
+                 'first letter': name[0],
+                 'double consonants': double_consonants}
+    return featureset
+
+train_set = nltk.classify.apply_features(features, train_names)
+devtest_set = nltk.classify.apply_features(features, devtest_names)
+test_set = nltk.classify.apply_features(features, devtest_names)
+
+classifier1 = nltk.NaiveBayesClassifier.train(train_set)
+classifier2 = nltk.MaxentClassifier.train(train_set, algorithm = 'gis', max_iter = 6)
+
+nltk.classify.accuracy(classifier1, devtest_set)
+nltk.classify.accuracy(classifier2, devtest_set)
+
+errors1, errors2= [], []
+
+for (n,t) in devtest_names:
+    guess1 = classifier1.classify( features(n) )
+    guess2 = classifier2.classify( features(n) )
+    if guess1 != t:
+        errors1.append( (n,t) )
+    if guess2 != t:
+        errors2.append( (n,t) )
+
+print(sorted(errors1), '\n\n\n', sorted(errors2))
+
+nltk.classify.accuracy(classifier1, test_set)
+nltk.classify.accuracy(classifier2, test_set)

@@ -1,0 +1,85 @@
+to view Gutenberg Fileids: 
+
+import nltk
+nltk.corpus.gutenberg.fileids() 
+
+to use a specific text:
+emma = nltk.corpus.gutenberg.words('austen-emma.txt')
+
+
+Easier method:
+from nltk.corpus import gutenberg
+emma = gutenberg.words('austen-emma.txt')
+___________________________________________________________________________________________________________
+
+
+English vocab:
+
+from nltk.corpus import words
+*can use this to check for misspelling/ unusual vocab
+nltk.corpus.words.words() = list of words in English dict
+
+
+filler words: 
+from nltk.corpus import stopwords
+stopwords.words('language') gives filler words in that language
+
+names:
+from nltk.corpus import names
+nltk.corpus.names.words('male.txt' or 'female.txt')
+
+
+pronouncing dictionary:
+nltk.corpus.cmudict
+*entries
+*dict: you can use this to find a pron of a word: nltk.corpus.cmudict.dict['avocado'] = [['AE2', 'V', 'AH0', 'K', 'AA1', 'D', 'OW0']]
+uses arpabet. see http://en.wikipedia.org/wiki/Arpabet
+the numbers in prons have meaning: 1 is primary stress, 2 is secondary stress, 0 is no stress
+
+
+Other languages
+---------------
+
+nltk.corpus.udhr.fileids()
+nltk.corpus.udhr.words(fileid)
+
+common words:
+nltk.corpus.swadesh
+swadesh.fileids() returns 2 letter ISO 639 language codes
+swadesh.words('fileid') returns words of the language fileid
+swadesh.entries(['fileid1', 'fileid2]) creates pairs associating words in language fileid1 with language fileid2
+for translation applications look at example in more important examples
+
+__________________________________________________________________________________________________________
+webtext
+from nltk.corpus import webtext
+webtext.fileids() to view contents
+
+brown
+from nltk.corpus import brown
+//
+brown.categories()
+brown.words(categories='news')
+brown.sents(categories=['news', 'editorial', 'reviews'])
+
+nps_chat
+from nltk.corpus import nps_chat
+*has no fileids, words, sents functions. Use posts instead:
+chatroom = nps_chat.posts('10-19-20s_706posts.xml')
+
+reuters corpus
+from nltk.corpus import reuters
+fileids and categories
+*categories overlap
+*can take multiple fileids:
+reuters.categories(['training/9865', 'training/9880'])
+
+inaugural address corpus
+from nltk.corpus import inaugural
+has fileids
+
+Many more in nltk. Some in other languages.
+
+_________________________________________________________________________________________________________________
+
+

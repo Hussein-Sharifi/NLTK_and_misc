@@ -1,0 +1,26 @@
+nltk.UnigramTagger(model = dict model, backoff = alternative tagger)
+
+Explanation:
+
+The idea here is to create a tagger that assigns the n most frequent words in a text with their most likely tag.
+We do this by creating a dictionary model where each nth word is a key and its value is the most likely tag. We
+achieve this using FreqDist and ConditionalFreqDist. When the unigram tagger encounters a word not in the most
+frequent list, it will defer to the alternative tagger.
+
+eg:
+---
+
+words = brown.words(categories = 'news')
+tagged_words = brown.tagged_words(categories = 'news')
+
+fd = nltk.FreqDist(words)
+cfd = nltk.ConditionalFreqDist(tagged_words)
+
+most_freq_words = fd.most_common(100)
+most_freq_tags = dict((w, cfd[w].max()) for (w,_) in most_freq_words)
+
+baseline_tagger = nltk.UnigramTagger(model = most_freq_tags,
+					backoff = nltk.DefaultTagger('NN'))
+
+baseline_tagger.tag(word tokens)
+baseline_tagger.evaluate(control tagged sents)

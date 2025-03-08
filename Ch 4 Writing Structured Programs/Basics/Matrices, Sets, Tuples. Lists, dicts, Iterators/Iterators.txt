@@ -1,0 +1,6 @@
+Like list but generate each item on the fly, which makes them memory efficient.
+
+eg: 
+I = iter([1,2,3,4,5])
+for i in I:
+    print('{} is the number of times I hop'.format(i))

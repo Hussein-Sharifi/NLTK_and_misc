@@ -1,0 +1,47 @@
+Gutenberg Examples
+
+Let's compute average number of characters per word, avg words per sentence, avg no of times a word appears in a vocabulary
+>>> for fileid in gutenberg.fileids():
+...     num_chars = len(gutenberg.raw(fileid)) [1]
+...     num_words = len(gutenberg.words(fileid))
+...     num_sents = len(gutenberg.sents(fileid))
+...     num_vocab = len(set(w.lower() for w in gutenberg.words(fileid)))
+...     print(round(num_chars/num_words), round(num_words/num_sents), round(num_words/num_vocab), fileid)
+
+
+Find sentence with longest length:
+longest_len = max(len(s) for w in gutenberg.sents(text))
+x = [s for s in gutenberg.sents(text) if len(s) == longest_len]
+___________________________________________________________________________________________________________________________
+
+let's count occurrence of specific words in a category from brown:
+from nltk.corpus import brown
+>>> news_text = brown.words(categories='news')
+>>> fdist = nltk.FreqDist(w.lower() for w in news_text)
+>>> modals = ['can', 'could', 'may', 'might', 'must', 'will']
+>>> for m in modals:
+...     print(m + ':', fdist[m], end=' ')
+
+
+___________________________________________________________________________________________
+examples beyond my knowledge:
+
+>>> cfd = nltk.ConditionalFreqDist(
+...           (genre, word)
+...           for genre in brown.categories()
+...           for word in brown.words(categories=genre))
+>>> genres = ['news', 'religion', 'hobbies', 'science_fiction', 'romance', 'humor']
+>>> modals = ['can', 'could', 'may', 'might', 'must', 'will']
+>>> cfd.tabulate(conditions=genres, samples=modals)
+
+
+>>> cfd = nltk.ConditionalFreqDist(
+...           (target, fileid[:4])
+...           for fileid in inaugural.fileids()
+...           for w in inaugural.words(fileid)
+...           for target in ['america', 'citizen']
+...           if w.lower().startswith(target)) [1]
+>>> cfd.plot()
+
+___________________________________________________________________________________________
+

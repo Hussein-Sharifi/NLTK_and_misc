@@ -1,0 +1,11 @@
+len(w for w in text) is not a thing. len works for defined objects, not iterables. 
+Instead, use sum(1 for w in text)
+
+Use memoize!!! huuge difference
+
+ 
+If your program uses a lot of files, you want Python to close them after use. Here's how:
+>>> with open("lexicon.txt") as f:
+...     data = f.read()
+
+Python will automatically close file after use.

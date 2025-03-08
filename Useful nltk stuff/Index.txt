@@ -1,0 +1,11 @@
+enumerate() helps with indexing a list.
+nltk.Index: nltk has this index type. it takes a list of 2-tuples (x1,x2) and lets you search everything matching x1
+
+
+
+
+
+eg: list = [('a','hi'), ('b', 'ho'), ('a', 'jo')]
+list_index = nltk.Index(list)
+>>>list_index['a']
+['hi', 'jo']

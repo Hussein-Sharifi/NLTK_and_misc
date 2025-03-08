@@ -1,0 +1,60 @@
+Here we will explore examples of OVERWRITING VS MODIFYING. 
+
+*Use id(object) to check reference number of object
+
+*To copy the items from a list foo to a new list bar, you can write bar = foo[:]. This copies the references inside the list instead of referencing the list itself. To copy a structure without copying object references:
+copy.deepcopy()
+
+*is vs ==: is checks whether the objects are the same (i.e. same reference to storage). == checks if the values are equal
+
+
+
+
+
+Examples:
+
+
+Transitive assignment makes a separate copy. eg.:
+>>> foo = 'Monty'
+>>> bar = foo [1]
+>>> foo = 'Python' [2]
+>>> bar
+'Monty'
+
+Transitive assignment does NOT make a separate copy. eg:
+>>> foo = ['Monty', 'Python']
+>>> bar = foo [1]
+>>> foo[1] = 'Bodkin' [2]
+>>> bar
+['Monty', 'Bodkin']
+What happened here? In the first example, Python is assigning the string 'Monty' to bar. When we overwrite foo, 'Monty' isn't affected. In the second, Python makes a reference to the list object. The list object itself got modified.
+_____________________________________________________________________________________________________________________
+
+Another example of list assignment being a reference:
+>>> empty = []
+>>> nested = [empty, empty, empty]
+>>> nested
+[[], [], []]
+>>> nested[1].append('Python')
+>>> nested
+[['Python'], ['Python'], ['Python']]
+
+>>> nested = [[]]*3
+>>> nested
+[[], [], []]
+>>> nested[0].append(1)
+>>> nested
+[[1], [1], [1]]
+
+_____________________________________________________________________________________________________________________
+
+>>>size = [5]
+>>>length = copy.deepcopy(size)
+>>>id(size)
+2340205778624
+>>>id(length)
+2340205783808
+>>> size == length
+True
+>>> size is length
+False

@@ -1,0 +1,29 @@
+dataset: brown
+
+
+suffix_fd = nltk.FreqDist()
+
+for word in brown.words():
+     word = word.lower()
+     suffix_fd[ word[-1:] ] += 1
+     suffix_fd[ word[-2:] ] += 1
+     suffix_fd[ word[-3:] ] += 1
+
+common_suffixes = [suffix for suffix,count in suffix_fd.most_common(100)]
+
+def pos_features(w):
+    features = {}
+    for suffix in common_suffixes:
+        features[ f'endswith({suffix})' ] = word.lower().endswith(suffix)
+    return features
+
+tagged_words = brown.tagged_words()
+feature_set = nltk.classify.apply_features(pos_features, tagged_words)
+ninety = int(len(feature_set) * 0.9)
+
+train_set = feature_set[:ninety]
+test_set = feature_set[ninety:]
+
+classifier = nltk.DecisionTreeClassifier.train(train_set)
+
+print( classifier.pseudocode(depth=4) )

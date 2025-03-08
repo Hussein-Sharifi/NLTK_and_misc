@@ -1,0 +1,28 @@
+Trimming Excess 
+
+
+
+
+Copyrights, organizations and whatnot
+-------------------------------------
+
+.find(string) starts from beginning
+.rfind(string) starts from end
+
+>>> raw.find("PART I")
+5338
+>>> raw.rfind("End of Project Gutenberg's Crime")
+1157743
+>>> raw = raw[5338:1157743] [1]
+>>> raw.find("PART I")
+0
+
+
+Website code and formatting
+---------------------------
+from bs4 import BeautifulSoup
+raw = BeautifulSoup(htmldata, 'html.parser').get_text()
+words = word_tokenize(raw)
+words = nltk.Text(words)
+
+

@@ -1,0 +1,15 @@
+*zip and enumerate: zip stops at min({len(list1), len(list2)})
+*min and max
+*list.insert(index, object)
+*list.extend([objects]): unlike list.append([objects]), which adds the list [objects], it adds each object in [objects]
+*set.add(object)
+
+>>> words = ['I', 'turned', 'off', 'the', 'spectroroute']
+>>> tags = ['noun', 'verb', 'prep', 'det', 'noun']
+>>> zip(words, tags)
+<zip object at ...>
+>>> list(zip(words, tags))
+[('I', 'noun'), ('turned', 'verb'), ('off', 'prep'),
+('the', 'det'), ('spectroroute', 'noun')]
+>>> list(enumerate(words))
+[(0, 'I'), (1, 'turned'), (2, 'off'), (3, 'the'), (4, 'spectroroute')]

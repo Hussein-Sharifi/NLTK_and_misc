@@ -1,0 +1,8 @@
+Create output file at current directory and write genesis words into it:
+
+>>> output_file = open('output.txt', 'w')
+>>> words = set(nltk.corpus.genesis.words('english-kjv.txt'))
+>>> for word in sorted(words):
+...     print(word, file=output_file)
+
+When we write non-text data to a file we must convert it to a string first

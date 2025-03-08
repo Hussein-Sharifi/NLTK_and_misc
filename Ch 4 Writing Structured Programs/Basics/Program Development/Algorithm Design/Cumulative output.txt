@@ -1,0 +1,18 @@
+yield
+-------
+Method 1: using initialized empty list. You're familiar with this method.
+Method 2: uses yield to create a generator object. More efficient
+
+Eg:
+def search1(substring, words):
+    result = []
+    for word in words:
+        if substring in word:
+            result.append(word)
+    return result
+
+def search2(substring, words):
+    for word in words:
+        if substring in word:
+            yield word
+

@@ -1,0 +1,17 @@
+When evaluating a search classifier, a high accuracy should be less appealing. If we're looking for 5 documents out
+of a thousand, the fact that most of them were labeled as irrelevant is less impressive. For this reason, we use
+different metrics to evaluate search classifiers.
+
+True positives, true negatives: documents correctly identifies as relevant/irrelevant
+
+False positives(TypeI Errors), False negatives (TypeII errors): documents incorrectly identified as
+relevant/irrelevant 
+
+
+Then we can use the following metrics:
+
+Precision = TP/(TP+FP): how many of the identifies documents are actually relevant.
+Recall = TP/(TP+FN): how many of the relevant documents were spotted
+
+F-Measure (or F-Score): (2*precision*recall) / (precision + recall): the harmonic mean of precision and recall,
+which combines the two into a single result.

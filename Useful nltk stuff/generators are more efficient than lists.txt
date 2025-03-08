@@ -1,0 +1,11 @@
+>>> max([w.lower() for w in word_tokenize(text)]) [1]
+'word'
+>>> max(w.lower() for w in word_tokenize(text)) [2]
+'word'
+
+The second line uses a generator expression. This is more than a notational convenience: in many language processing situations, generator expressions will be more efficient. In [1], storage for the list object must be allocated before the value of max() is computed. If the text is very large, this could be slow. In [2], the data is streamed to the calling function. Since the calling function simply has to find the maximum value — the word which comes latest in lexicographic sort order — it can process the stream of data without having to store anything more than the maximum value seen so far.
+
+
+For iteration: generators > lists > dicts
+
+for lookup, dicts > lists

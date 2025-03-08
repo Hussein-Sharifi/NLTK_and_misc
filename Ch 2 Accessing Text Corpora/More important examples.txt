@@ -1,0 +1,53 @@
+More important examples
+
+entries = nltk.corpus.cmudict.entries()
+syllable = ['N', 'IH0', 'K', 'S']
+[word for word, pron in entries if pron[-4:] == syllable]
+
+
+
+***define a function to extract the stress digits and then scan our lexicon to find words having a particular stress pattern
+
+def stress(pron):
+...     return [char for phone in pron for char in phone if char.isdigit()]
+>>> [w for w, pron in entries if stress(pron) == ['0', '1', '0', '2', '0']]
+['abbreviated', 'abbreviated', 'abbreviating', 'accelerated', 'accelerating',
+'accelerator', 'accelerators', 'accentuated', 'accentuating', 'accommodated',
+'accommodating', 'accommodative', 'accumulated', 'accumulating', 'accumulative', ...]
+>>> [w for w, pron in entries if stress(pron) == ['0', '2', '0', '1', '0']]
+['abbreviation', 'abbreviations', 'abomination', 'abortifacient', 'abortifacients',
+'academicians', 'accommodation', 'accommodations', 'accreditation', 'accreditations',
+'accumulation', 'accumulations', 'acetylcholine', 'acetylcholine', 'adjudication', ...]
+
+find all the p-words consisting of three sounds, and group them according to their first and last sounds.
+____________________________________________________________________________________________________________________
+
+Translation: first two examples are wrong because dict() is not callable? maybe need import
+
+*fr2en = swadesh.entries(['fr', 'en'])
+>>> fr2en
+[('je', 'I'), ('tu, vous', 'you (singular), thou'), ('il', 'he'), ...]
+translate = dict(fr2en)
+>>> translate['chien']
+'dog'
+
+*now both german and Spanish:
+de2en = swadesh.entries(['de', 'en'])    # German-English
+>>> es2en = swadesh.entries(['es', 'en'])    # Spanish-English
+>>> translate.update(dict(de2en))
+>>> translate.update(dict(es2en))
+>>> translate['Hund']
+'dog'
+>>> translate['perro']
+'dog'
+
+
+*comparing words in multiple languages:
+languages = ['en', 'de', 'nl', 'es', 'fr', 'pt', 'la']
+>>> for i in [139, 140, 141, 142]:
+...     print(swadesh.entries(languages)[i])
+...
+('say', 'sagen', 'zeggen', 'decir', 'dire', 'dizer', 'dicere')
+('sing', 'singen', 'zingen', 'cantar', 'chanter', 'cantar', 'canere')
+('play', 'spielen', 'spelen', 'jugar', 'jouer', 'jogar, brincar', 'ludere')
+('float', 'schweben', 'zweven', 'flotar', 'flotter', 'flutuar, boiar', 'fluctuare')

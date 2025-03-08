@@ -1,0 +1,5 @@
+Before we hit the DefaultTagger/RegexpTagger layer, we can try tagging unknown words the following way:
+
+We keep the n most frequent words in the training set, and replace every other word with UNK. Then if we have 
+the context '... to UNK', our Ngram tagger will have seen many instances of this pattern, usually with the result
+that UNK is tagged as a verb. 

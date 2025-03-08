@@ -1,0 +1,10 @@
+
+s.replace(t, u, n)	replace instances of t with u inside s n times. Used for deleting and replacing entries
+s.splitlines()	split s into a list of strings, one per line
+s.count(string): counts how many times a string occurs in s. 
+
+find vs r find and similar: 
+s.find(t)	index of first instance of string t inside s (-1 if not found)
+s.rfind(t)	index of last instance of string t inside s (-1 if not found)
+s.index(t)	like s.find(t) except it raises ValueError if not found
+s.rindex(t)	like s.rfind(t) except it raises ValueError if not found

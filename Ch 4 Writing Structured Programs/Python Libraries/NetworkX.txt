@@ -1,0 +1,4 @@
+import networkx
+
+*for defining and manipulating structures consisting of nodes and edges, known as graphs. NetworkX can be used in conjunction with Matplotlib to visualize networks, such as WordNet.
+

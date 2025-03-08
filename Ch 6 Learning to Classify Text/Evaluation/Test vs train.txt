@@ -1,0 +1,20 @@
+For classification tasks that have a small number of well-balanced labels and a diverse test set, a meaningful evaluation 
+can be performed with as few as 100 evaluation instances.
+
+If we a large number of labels, some of which are infrequent, we want a test set that has at least 50 instances of each
+label. Moreover, if much of test set comes from the same resource, we need to further increase the size of the test set.
+
+We want training and testing data to be different. If our pos tagger was trained and tested on brown news category, there
+are so many similarities. using random.shuffle() will also lead to language from the same document being used for training
+and testing. All of this should make us less confident in our classifier. Perhaps it would be better to split our data
+using:
+
+file_ids = brown.fileids(categories='news')
+ninety = int( len(file_ids) *.9 )
+train_set = brown.tagged_sents(file_ids[ninety:])
+test_set = brown.tagged_sents(file_ids[:ninety])
+
+Or perhaps even drawing the test data set form a different category.
+
+
+***When large amounts of annotated data are available, it is common to err on the side of safety by using 10% of the overall data for evaluation.

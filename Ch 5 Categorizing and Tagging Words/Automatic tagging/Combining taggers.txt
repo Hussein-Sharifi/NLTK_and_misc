@@ -1,0 +1,20 @@
+Most NLTK taggers have backoff statements. You can nest those statements.
+
+eg:
+---
+
+Let's use bigram tagger if we have the pattern. If not, resort to unitagger. If not, resort to default tagger:
+
+t0 = nltk.DefaultTagger('NN')
+t1 = nltk.UnigramTagger(gold tagged sents, backoff = t0)
+t2 = nltk.BigramTagger(gold tagged sents, cutoff = 2, backoff = t1)
+t3 = nltk.TrigramTagger(gold tagged sents, backoff = t2)
+
+t3.evaluate(test_sents)
+
+
+*There is an automatic process going on here that minimizes the model size of more complex taggers. Specifically,
+if for example the bigram tagger would predict the same outcome as the unigram tagger, that training instance is
+discarded for the bigram tagger. This takes more time since it has to compare outcomes during training. However,
+it produces a leaner model that requires less storage space. The model becomes easier to save, load, and use
+for tagging

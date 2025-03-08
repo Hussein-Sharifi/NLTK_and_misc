@@ -1,0 +1,16 @@
+For loop with a 2-tuple (note you can omit the parenthesis of the 2-tuple:
+
+for word, pron in entries:
+...     if len(pron) == 3: 
+...         ph1, ph2, ph3 = pron 
+...         if ph1 == 'P' and ph3 == 'T':
+...             print(word, ph2, end=' ')
+
+
+same idea but in a list comprehension:
+
+>>> syllable = ['N', 'IH0', 'K', 'S']
+>>> [word for word, pron in entries if pron[-4:] == syllable]
+["atlantic's", 'audiotronics', 'avionics', 'beatniks', 'calisthenics', 'centronics',
+'chamonix', 'chetniks', "clinic's", 'clinics', 'conics', 'conics', 'cryogenics',
+'cynics', 'diasonics', "dominic's", 'ebonics', 'electronics', "electronics'", ...]

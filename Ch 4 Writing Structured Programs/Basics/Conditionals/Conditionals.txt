@@ -1,0 +1,30 @@
+all() and any() check if all/any conditions are met for a list of conditions
+
+Empty string counts as a false for conditionals. Any nonempty string and nonzero integer counts as true
+
+
+eg:
+>>> def is_content_word(word):
+...     return word.lower() not in ['a', 'of', 'the', 'and', 'will', ',', '.']
+>>> sent = ['Take', 'care', 'of', 'the', 'sense', ',', 'and', 'the',
+...         'sounds', 'will', 'take', 'care', 'of', 'themselves', '.']
+>>> [w for w in sent if is_content_word(w)]
+['Take', 'care', 'sense', 'sounds', 'take', 'care', 'themselves']
+
+ 
+eg: 
+>>> mixed = ['cat', '', ['dog'], []]
+>>> for element in mixed:
+...     if element:
+...         print(element)
+...
+cat
+['dog']
+That is, we don't need to say if len(element) > 0: in the condition.
+
+eg:
+>>> sent = ['No', 'good', 'fish', 'goes', 'anywhere', 'without', 'a', 'porpoise', '.']
+>>> all(len(w) > 4 for w in sent)
+False
+>>> any(len(w) > 4 for w in sent)
+True

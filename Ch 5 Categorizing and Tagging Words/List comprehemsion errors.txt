@@ -1,0 +1,18 @@
+RuntimeError: dictionary changed size during iteration
+
+
+eg: 
+---
+
+[c for c in cfd if cfd[c+'s']['NNS'] > cfd[c]['NN']]
+*this won't work because we can't modify c while it's associated with the iterable cfd. Instead we need a separate iterable:
+
+[c for c in list(cfd) if cfd[c+'s']['NNS'] > cfd[c]['NN']]
+
+
+Another solution:
+
+cfd1 = deepcopy(cfd)
+[c for c in cfd1 if cfd[c+'s']['NNS'] > cfd[c]['NN']]
+
+____________________________________________________________________________________________________________________________

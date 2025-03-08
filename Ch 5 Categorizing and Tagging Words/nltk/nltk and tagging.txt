@@ -1,0 +1,23 @@
+nltk.pos_tag(text)
+nltk.tag.str2tuple('fly/NN') = ('fly', 'NN')
+
+Tagged corpora
+--------------
+
+nltk.corpus.brown.tagged_words/sents(categories  '__', tagset='universal')
+*universal tagset will use NOUN instead of NN, for example. Useful for maintaining a standard across corpora
+
+nltk.app.concordance() opens an interface that lets you search examples of combinations of universal tagsets
+eg: NOUN NOUN NOUN
+
+Notes
+-----
+
+*corpora might be tagged differently. Use nltk.corpus.???.readme() and read the section on tagging for info.
+
+*There are tagged corpora for several other languages in NLTK
+
+*Automatic taggers are trained on lists of sentences, not words.
+
+
+

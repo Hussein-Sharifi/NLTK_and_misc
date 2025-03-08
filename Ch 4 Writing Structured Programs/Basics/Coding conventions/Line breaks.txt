@@ -1,0 +1,6 @@
+Long lines
+----------
+*If you need to break a line, try to do it inside parentheses or brackets or braces, since Python detects the line
+continuation. If you can't, use a backslash at the line break, which bypasses function:
+>>> if len(syllables) > 4 and len(syllables[2]) == 3 and \
+...    syllables[2][2] in [aeiou] and syllables[2][3] == syllables[1][3]:

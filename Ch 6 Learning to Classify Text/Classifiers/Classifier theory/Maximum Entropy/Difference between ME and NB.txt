@@ -1,0 +1,41 @@
+
+Differences from Naive Bayes
+----------------------------
+
+Naive Bayes defines a parameter for each label (prior probability) and a parameter for each (feature, label) pair.
+In contrast, Maximum Entropy allows the user to decide which combinations of labels and features should have their
+own parameters. For example you can associate a feature with more than one label, or associate multiple features
+with a label. This will sometimes allow the model to "generalize" over some of the differences between related labels
+or features.
+
+Each combination of labels and features is given its own parameter, which is called a JOINT-FEATURE. note joint
+features are properties of labeled values. Simple features are properties of unlabeled values
+
+In literature that describes and discusses Maximum Entropy models, the term "features" often refers to joint-
+features; the term "contexts" refers to what we have been calling (simple) features.
+
+In the end, like Naive Bayes, you're multiplying all your terms together. Except here all the terms are joint 
+features involving the input and label.
+
+		P(input, label) =  Prod joint-features(input,label) w[joint-feature] 
+
+
+_____________________________________________________________________________________________________________________
+
+***Naive Bayes is a GENERATIVE classifier. It predicts P(input, label). Meaning we're looking at the probability of
+the input occurring along with the label.
+
+Maximum Entropy is CONDITIONAL. It predicts P(label| input). Meaning we start by assuming the input, then look for 
+most likely label. We can't use it to answer questions about probability of inputs.
+
+eg:
+---
+
+1. What is the most likely label for a given input?
+2. How likely is a given label for a given input?
+3. What is the most likely input value?
+4. How likely is a given input value?
+5. How likely is a given input value with a given label?
+6. What is the most likely label for an input that might have one of two values (but we don't know which)?
+
+Naive Bayes can answer all of these. Maximum Entropy can only answer 1 and 2. 

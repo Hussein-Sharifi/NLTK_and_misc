@@ -1,0 +1,39 @@
+Sometimes you just need a little summary
+
+eg: 
+def get_text(file):
+    """Read text from a file, normalizing whitespace and stripping HTML markup."""
+
+To see it, use help(get_text):
+ >>> help(get_text)
+|   Help on function get_text in module __main__:
+|
+|   get_text(file)
+|       Read text from a file, normalizing whitespace and stripping HTML markup.
+
+
+
+Sometimes you need full documentation. The first line is still a summary, and you can access the rest
+
+eg:
+def accuracy(reference, test):
+    """
+    Calculate the fraction of test items that equal the corresponding reference items.
+
+    Given a list of reference values and a corresponding list of test values,
+    return the fraction of corresponding values that are equal.
+    In particular, return the fraction of indexes
+    {0<i<=len(test)} such that C{test[i] == reference[i]}.
+
+        >>> accuracy(['ADJ', 'N', 'V', 'N'], ['N', 'N', 'V', 'ADJ'])
+        0.5
+
+    :param reference: An ordered list of reference values
+    :type reference: list
+    :param test: A list of values to compare against the corresponding
+        reference values
+    :type test: list
+    :return: the accuracy score
+    :rtype: float
+    :raises ValueError: If reference and length do not have the same length
+    """

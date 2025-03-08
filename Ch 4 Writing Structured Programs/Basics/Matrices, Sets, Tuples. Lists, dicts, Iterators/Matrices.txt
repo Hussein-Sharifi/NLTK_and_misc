@@ -1,0 +1,6 @@
+Don't use multiplication to create matrices, since that involves copying references. 
+Correct eg.:
+
+n=3, m=7
+
+M = [[set() for i in range(n)] for j in range(m)]

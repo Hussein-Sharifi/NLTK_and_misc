@@ -1,0 +1,37 @@
+First, split train and test data. Then:
+
+split your data into N folds. train your model on all folds except the nth one. Repeat for every n in range(N).
+This way you get to test your data and tune your hyperparameters on the test data multiple times. The combined score
+tends to be stable given N is large enough. As a rule of thumb:
+
+Each fold should have at least 30-50 samples. 
+
+*if your dataset is small (~1000), use N=10 or even leave-one-out
+						   -------------
+*if your dataset is medium (~1000 - 100,000), use N=5 to N=10
+
+*if your dataset is large (~ > 100,000), use N=3 to N=5 \
+
+
+leave-one-out (LOO-CV): means N folds... one for each entry. This often works super well, but struggles in the 
+------------									       following circumstances:
+
+*High variance and noisy datasets
+
+*computationally expensive situations
+
+*potential overfitting
+
+
+We can also use cross-validation to see how well our classifier performs on a wide variety of train sets
+
+_____________________________________________________________________________________________________________________
+
+
+Another alternative is to use bootstrapping:
+
+split train and test. create a resampled version of the dataset of size n by randomly selecting from the original
+dataset with replacement. train an independent instance of the classifier on the resampled dataset. repeat this process eg. 1000 to 10,000 iterations. use majority voting or averaging of all these classifiers.
+
+
+Also look into: boosting and out-of-bag evaluation

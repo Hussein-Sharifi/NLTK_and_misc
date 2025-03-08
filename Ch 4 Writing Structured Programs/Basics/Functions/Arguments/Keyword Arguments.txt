@@ -1,0 +1,58 @@
+*We can give arguments a default value, which may be changed. But don't use mutable objects (looking at you, lists).
+eg:
+>>> def repeat(msg='<empty>', num=1):
+...     return msg * num
+>>> repeat(num=3)
+'<empty><empty><empty>'
+>>> repeat(msg='Alice')
+'Alice'
+>>> repeat(num=5, msg='Alice')
+'AliceAliceAliceAliceAlice'
+
+If we mix these two kinds of parameters, then we must ensure that the unnamed parameters precede the named ones. It has to be this way, since unnamed parameters are defined by position.
+
+
+
+We can also define a function that takes an arbitrary number of unnamed and named parameters, and access them via an in-place list of arguments *args and an "in-place dictionary" of keyword arguments **kwargs. *args will correspond to all unnamed parameters
+>>> def generic(*args, **kwargs):
+...     print(args)
+...     print(kwargs)
+...
+>>> generic(1, "African swallow", monty="python")
+(1, 'African swallow')
+{'monty': 'python'}
+
+This can be used when passing parameters:
+>>> song = [['four', 'calling', 'birds'],
+...         ['three', 'French', 'hens'],
+...         ['two', 'turtle', 'doves']]
+>>> list(zip(song[0], song[1], song[2]))
+[('four', 'three', 'two'), ('calling', 'French', 'turtle'), ('birds', 'hens', 'doves')]
+>>> list(zip(*song))
+[('four', 'three', 'two'), ('calling', 'French', 'turtle'), ('birds', 'hens', 'doves')]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Using a default argument, we can provide an option for running the function with explanations:
+>>> def freq_words(file, min=1, num=10, verbose=False):
+...     freqdist = FreqDist()
+...     if verbose: print("Opening", file)
+...     text = open(file).read()
+...     if verbose: print("Read in %d characters" % len(file))
+...     for word in word_tokenize(text):
+...         if len(word) >= min:
+...             freqdist[word] += 1
+...             if verbose and freqdist.N() % 100 == 0: print(".", sep="")
+...     if verbose: print
+...     return freqdist.most_common(num)

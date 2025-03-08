@@ -1,0 +1,12 @@
+*Say we have a list with data and we want to train our model on 90% of data and test on last 10%
+
+>>>cut = int(0.9 * len(data))
+>>>training, testing = data[:cut], data[cut:]
+
+let's verify:
+>>> text == training_data + test_data [3]
+True
+>>> len(training_data) / len(test_data) [4]
+9.0
+
+_____________________________________________________________________________________________________________________

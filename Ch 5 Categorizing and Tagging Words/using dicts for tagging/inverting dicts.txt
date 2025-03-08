@@ -1,0 +1,9 @@
+d = some dict
+
+*dict((value, key) for (key,value) in d): this works if no key has more than one value. Otherwise we need to use:
+
+*d2 = defaultdict(list)
+for (key, value) in d.items():
+    d2[value].append(key)
+
+*Or: nltk.Index((value, key) for (key, value) in d.items())

@@ -1,0 +1,9 @@
+re.sub(pattern, replacement, string, count=0)
+
+pattern: The regex pattern to search for.
+
+replacement: The string to replace the matched pattern with.
+
+string: The input string where replacements are to be made.
+
+count: Optional; limits the number of replacements.

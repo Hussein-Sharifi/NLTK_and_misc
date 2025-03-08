@@ -1,0 +1,32 @@
+import numpy
+from numpy import array, linalg
+
+*Great for linear algebra and some maths functions. nltk.cluster makes extensive use of NumPy arrays, and includes support for k-means clustering, Gaussian EM clustering, group average agglomerative clustering, and dendrogram plots
+
+
+Matrices
+>>> from numpy import array
+>>> cube = array([ [[0,0,0], [1,1,1], [2,2,2]],
+...                [[3,3,3], [4,4,4], [5,5,5]],
+...                [[6,6,6], [7,7,7], [8,8,8]] ])
+>>> cube[1,1,1]
+4
+>>> cube[2].transpose()
+array([[6, 7, 8],
+       [6, 7, 8],
+       [6, 7, 8]])
+>>> cube[2,1:]
+array([[7, 7, 7],
+       [8, 8, 8]])
+
+SVD
+>>> a=array([[4,0], [3,-5]])
+>>> u,s,vt = linalg.svd(a)
+>>> u
+array([[-0.4472136 , -0.89442719],
+       [-0.89442719,  0.4472136 ]])
+>>> s
+array([ 6.32455532,  3.16227766])
+>>> vt
+array([[-0.70710678,  0.70710678],
+       [-0.70710678, -0.70710678]])

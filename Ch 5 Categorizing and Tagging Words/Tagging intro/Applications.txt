@@ -1,0 +1,73 @@
+Constructing bigrams of tags:
+-----------------------------
+
+eg:
+word_tag_pairs = nltk.bigrams(tagged_text)
+noun_preceders = [a[1] for (a,b) in word_tag_pairs if b[1] = 'NOUN']
+fd = nltk.FreqDist(noun_preceders)
+*this gives us a good indication of what should precede a noun. 
+
+
+
+
+Finding common verbs with fds or common usage with CFDs
+-------------------------------------------------------
+
+eg:
+word_tags = nltk.corpus.treebank.tagged_words(tagset='universal')
+word_tags_fd = nltk.FreqDist(word_tags)
+[wt[0] for (wt, freq) in word_tags_fd if wt[1] == 'VERB']
+*this gives us most common verbs
+
+eg:
+cfd1 = nltk.ConditionalFreqDist(word_tags)
+cfd1['yield'].most_common()
+*note yield is the condition, and tags are counted. So this gives us most common tags for the word yield
+
+tag_words = [(t,w) for (w,t) in nltk.corpus.treebank.tagged_words()]
+cfd2 = nltk.ConditionalFreqDist(word_tags)
+cfd2['VBN'].most_common()
+*VBN is the condition. So we get most common VBN tagged words
+
+
+Making a dictionary for tags
+----------------------------
+
+def findtag(tag_prefix, tagged_text):
+    cfd = nltk.ConditionalFreqDist((tag, word) for (word, tag) in tagged_text 
+                                    if tag.startswith(tag_prefix))
+    return dict((tag, cfd[tag].most_common(5)) for tag in cfd)
+
+Using bigrams to find common following items
+--------------------------------------------
+
+eg: say we want to find what words precede 'often'
+text = nltk.corpus.brown.words(categories = 'learned')
+bgrams = sorted(set(b for (a,b) in nltk.bigrams(text) if a == 'often'))
+
+it might be more instructive to find tags:
+tagged_text = nltk.corpus.brown.tagged_words(categories = 'learned', tagset = 'universal')
+fd = nltk.FreqDist((b[1] for a,b in nltk.bigrams(tagged_text) if a[0] == 'often'))
+fd.tabulate()
+*we see often is mostly followed by verbs.
+
+
+Checking more complicated sequences using findall
+-------------------------------------------------
+
+eg: say we're looking for verb 'to' verb
+tagged_text = nltk.corpus.brown.tagged_words(categories = 'learned', tagset = 'universal')
+for (w1,t1), (w2,t2), (w3,t3) in nltk.trigrams(tagged_text):
+     if t1.startswith('V') and w2.lower() == 'to' and t3.startswith('V'):
+          print(w1, w2, w3)
+
+Searching for words with ambiguous part of speech tag
+------------------------------------------------------
+data = nltk.ConditionalFreqDist((w.lower(),t) for (w,t) in tagged_text)
+for condition in data:
+    if len(data[condition]) > 3:
+         tags = [tag for tag,_ in data[condition].most_common()]
+         print(condition + ':', ' '.join(tags))
+
+
+

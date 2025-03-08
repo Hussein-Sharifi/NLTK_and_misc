@@ -1,0 +1,71 @@
+import nltk, re, pprint
+from nltk import word_tokenize
+from urllib import request
+
+Gutenberg
+---------
+Let's download crime and punishment from Project Gutenberg website:
+
+>>> url = "http://www.gutenberg.org/files/2554/2554-0.txt"
+>>> response = request.urlopen(url)
+>>> raw = response.read().decode('utf8')
+
+
+Website text
+------------
+url = 'link'
+html = request.urlopen(url).read().decode('utf8')
+
+
+
+An RSS feed consolidates information sources in one place and provides updates when a site adds new content
+
+RSS feeds
+---------
+
+import feedparser
+llog = feedparser.parse('http://languagelog.ldc.upenn.edu/nll/?feed=atom')
+llog['feed']['title']
+posts = llog.entries
+post = llog.entries[2]
+post.title
+content = post.content[0].value
+raw = BeautifulSoup(content, 'html.parser').get_text()
+words = word_tokenize(raw) *sometimes using word_tokenize will merge words together
+
+
+Local Files
+-----------
+
+
+*For current directory
+To check files in current directory:
+import os
+os.listdir()
+To find current directory:
+import os
+cwd = os.getcwd()
+
+Once you have file in the right directory:
+f = open('filename.___')
+raw = f.read()
+
+if open() doesn't work, it might be a formatting issue. use this for universal formatting:
+open('filename.___', 'rU')
+
+*For anywhere else:
+check the file's path using right click > properties
+double every slash in the path (because \ bypasses function in Python, you want to bypass bypassing function..)
+f = open(path)
+f.read()
+
+*
+We can also use this to obtain Gutenberg files (recall they're downloaded with the nltk package)
+>>> path = nltk.data.find('corpora/gutenberg/melville-moby_dick.txt')
+>>> raw = open(path, 'rU').read()
+
+
+PDFs, Word, and other binary formats
+-------------------------------------
+ASCII text and HTML text are human readable formats. Text often comes in binary formats — like PDF and MSWord — that can only be opened using specialized software. Third-party libraries such as pypdf and pywin32 provide access to these formats. Extracting text from multi-column documents is particularly challenging. For once-off conversion of a few documents, it is simpler to open the document with a suitable application, then save it as text to your local drive, and access it as described below. If the document is already on the web, you can enter its URL in Google's search box. The search result often includes a link to an HTML version of the document, which you can save as text.
+

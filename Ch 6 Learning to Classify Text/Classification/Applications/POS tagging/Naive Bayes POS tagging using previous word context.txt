@@ -1,0 +1,44 @@
+def pos_features(i, sentence):
+    features = { 'suffix1': sentence[i][-1:], 
+                 'suffix2': sentence[i][-2:],
+                 'suffix3': sentence[i][-3:]}
+    if i == 0:
+        features[ 'prev_word' ] = '<START>'
+    else:
+        features[ 'prev_word' ] = sentence[i - 1]
+    return features
+
+tagged_sents = brown.tagged_sents(categories = 'news')
+featuresets = []
+
+for sent in tagged_sents:
+    untagged_sent = nltk.tag.untag(sent)
+    for ( i, (w,t) ) in enumerate(sent):
+        featuresets.append( (pos_features(i, untagged_sent), t) )
+
+ninety = int( len(featuresets)*.9 )
+train_set, test_set = featuresets[:ninety], featuresets[ninety:]
+
+classifier = nltk.NaiveBayesClassifier.train(train_set)
+nltk.classify.accuracy(classifier, test_set)
+
+__________________________________________________________________________________________________________________________
+
+***Same idea but additionally including previous word's tag:
+
+
+def pos_features(i, tagged_sentence):
+    features = { 'suffix1': tagged_sentence[i][0][-1:], 
+                 'suffix2': tagged_sentence[i][0][-2:],
+                 'suffix3': tagged_sentence[i][0][-3:]}
+    if i == 0:
+        features[ 'prev_word' ] = '<START>'
+        features[ 'prev_tag' ] = '<START TAG>'
+    else:
+        features[ 'prev_word' ] = tagged_sentence[i - 1][0]
+        features[ 'prev_tag'  ] = tagged_sentence[i - 1][1]
+    return features
+
+for sent in tagged_sents:
+    for ( i, (w,t) ) in enumerate(sent):
+        featuresets.append( (pos_features(i, sent), t) )

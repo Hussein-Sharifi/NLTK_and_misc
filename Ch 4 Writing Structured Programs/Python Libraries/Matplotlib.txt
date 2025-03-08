@@ -1,0 +1,24 @@
+from matplotlib import use, pyplot
+
+
+pyplot.plot(x_list, y_list)
+
+pylab.semilogx(): for log plotting
+pyplot.bar()
+pyplot.xticks()
+pyplot.legend()
+pyplot.ylabel()
+pyplot.title()
+
+To save figure:
+use('Agg'):  specify the Agg backend for matplotlib, which is a library for producing raster (pixel) images
+pyplot.savefig('createname.png')
+
+import pylab
+
+sizes = 2 ** pylab.arange(15)
+pylab.plot(sizes, y-values, '-bo')
+pylab.title('Lookup Tagger Performance with Varying Model Size')
+pylab.xlabel('Model Size')
+pylab.ylabel('Performance')
+pylab.show()

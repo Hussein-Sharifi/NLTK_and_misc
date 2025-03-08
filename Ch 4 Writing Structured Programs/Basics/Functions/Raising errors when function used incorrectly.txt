@@ -1,0 +1,27 @@
+assert, isinstance, and basestring
+----------------------------------
+Let's say your function should take in a string. Instead of using conditionals (if type(x) == str), use assert, which raises an explicit error and stops the program. Also, instead of asserting type, use isinstance, which also checks subclasses. Finally, instead of str use basestring, which includes Unicode:
+
+>>> def tag(word):
+...     assert isinstance(word, basestring), "argument to tag() must be a string"
+
+
+
+raise and ValueError
+--------------------
+if len(reference) != len(test):
+        raise ValueError("Lists must have the same length.")
+
+
+____________________________________________________________________________________________________________________________
+
+If you want to run a loop until an error pops up:
+
+while True:
+    try:
+        ...
+    except Exception as x:
+        print(f"error causes is {x}")
+        break
+
+Exception is a catchall. If you want to target a specific error, replace it. ex. ValueError

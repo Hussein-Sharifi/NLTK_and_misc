@@ -1,0 +1,13 @@
+Other Functions
+
+'Word'.lower() converts Word to all lower case
+'Word'.upper() converts Word to all upper case
+
+range(start, end, increment): eg range(20, 10, -2)
+
+isinstance(object,class)
+ex: isinstance('hi', str) is true
+
+to see all possible methods for an object: dir(object)
+
+tabulate(table, headers = ['___', ...], tablefmt (optional))

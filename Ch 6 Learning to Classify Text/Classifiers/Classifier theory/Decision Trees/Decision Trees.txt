@@ -1,0 +1,51 @@
+Made up of DECISION NODES, which check feature values--splitting into branches, and LEAD NODES which is where 
+branches terminate with a label. The first node is called the ROOT NODE.
+
+
+
+How it works
+------------
+Let's look at a simpler example, called a DECISION STUMP. Which is a tree with a single node. We simply pick a
+feature, then assign the label that corresponds to the highest frequency. Decision trees simply do this for every
+node, starting with the most predictive feature each time. If a leaf node has does not meat our accuracy level, it is replaced by a new decision node.
+
+
+Disadvantages
+-------------
+
+The number of training samples left for each leaf node can be small if there are too many decision nodes. These lower
+nodes may overfit the training set. We can deal with this by:
+ 
+*setting a minimum limit to the number of samples per leaf node, after which the algorithm stops splitting that path.
+*PRUNING the tree: i.e. creating a full sized tree then cutting branches that don't improve performance on devtest.
+
+Another disadvantage is that trees force features to be split independently. For example, has(football) might be
+highly predictive of sports category. Since space is limited at the top of the tree, this feature might appear at
+lower levels and it would have to appear for each branch. This is computationally expensive
+
+Trees tend not to take sufficient advantage of features with weak but positive predictive qualities. These features
+would occur too low in the tree and might have too few samples.
+
+The fact the trees have to check features in a specific order limits their ability to exploit features that are
+relatively independent from each other. This is where Naive Bayes shines.
+___________________________________________________________________________________________________________________
+
+Deciding which features are most predictive
+-------------------------------------------
+
+INFORMATION GAIN: This measures how much entropy decreased once we split data according to some feature. Entropy
+is simply the sum of the probability of each label l times log of that probability [sum( P(l) * log(P(l)) )]. 
+
+*labels that have low or high frequency don't contribute much entropy. cuz then you know it mostly is or is not 
+label l
+
+example calculation:
+
+import math
+def entropy(labels):
+    fd = nltk.FreqDist(labels)
+    probs = [fd.freq[l] for l in fd]
+    return -sum( p * math.log(p,2) for p in probs)
+
+once we calculate the entropy for each each leaf node, we take the average entropy of the two weighted by the number
+of samples in each leaf. repeat this for every feature and see which one decreases entropy the most. 

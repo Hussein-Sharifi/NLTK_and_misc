@@ -1,0 +1,25 @@
+Both ngram tagging and Brill tagging are supervised training methods. Meaning the correct tag is provided.
+
+Brill tagging works by guessing the tag of each word, then going back and fixing mistakes. Instead of counting
+observations, it stores information about a list of transformations correction rules.
+
+
+
+Eg: 
+---
+
+sent: The President said he will ask Congress to increase grants to states for vocational rehabilitation
+
+*We will examine the operation of two rules: (a) Replace NN with VB when the previous word is TO; (b) Replace TO with IN when the next tag is NNS. 6.1 illustrates this process, first tagging with the unigram tagger, then applying the rules to fix the errors.
+
+Phrase	to	increase	grants	to	states	for	vocational	rehabilitation
+Unigram	TO	NN	NNS	TO	NNS	IN	JJ	NN
+Rule 1	 	VB	 	 	 	 	 	 
+Rule 2	 	 	 	IN	 	 	 	 
+Output	TO	VB	NNS	IN	NNS	IN	JJ	NN
+Gold	TO	VB	NNS	IN	NNS	IN	JJ	NN
+
+
+To see a demonstration: 
+>>> from nltk.tbl import demo as brill_demo
+>>> brill_demo.demo()

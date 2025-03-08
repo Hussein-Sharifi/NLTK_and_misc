@@ -1,0 +1,15 @@
+Tokenization:
+
+import nltk
+from nltk import word_tokenize
+from nltk import sent_tokenize
+
+words = word_tokenize(rawtext)
+sents = sent_tokenize(rawtext)
+
+To convert to a text file like the ones we've been working with
+nltk.Text(words)
+nltk.Text(sents)
+
+
+There's also wordpunct_tokenize(), which tokenizes based on whitespace and punctuation. this is lower-level but useful if you want to analyze all punctuations separately

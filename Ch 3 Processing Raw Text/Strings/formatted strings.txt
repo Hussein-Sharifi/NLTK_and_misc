@@ -1,0 +1,53 @@
+str.format(): lets you use {} as a replacement for a value specified in the argument:
+
+ex:
+>>> '{}->{};'.format ('cat', 3)
+'cat->3;'
+
+Such a string that contains replacement fields is called a format string, or fstring for short.
+*Arguments are automatically read left to right, but you can change the order using {1} {0}.
+
+ex: 
+'from {0} to {1} and from {1} to {0}'.format('A', 'B')
+'from A to B and from B to A'
+
+*We can also control width of string using {:w}. we can add a < or > for left and right alignment: 
+ex:
+>>> '{:6}'.format(41)
+'    41'
+>>> '{:<6}' .format(41)
+'41    '
+>>> '{:>6}'.format('dog')
+ '   dog'
+We could use this to automatically customize the column to be just wide enough to accommodate all the words, using width = max(len(w) for w in words).
+
+
+*We can control number of decimals for a floating number:
+ex:
+>>> import math
+>>> '{:.4f}'.format(math.pi)
+'3.1416'
+
+
+*Same thing but for a percentage--no need to multiply by 100:
+ex:
+>>> count, total = 3205, 9375
+>>> "accuracy for {} words: {:.4%}".format(total, count / total)
+'accuracy for 9375 words: 34.1867%'
+
+
+*Number of sig. figs.:
+ex:
+>>> '{:.4}'.format(15.22918)
+'15.23'
+
+
+
+
+This can be used as a more intuitive way to print multiple variables:
+
+>>>fdist = nltk.FreqDist(['dog', 'cat', 'dog', 'cat', 'dog', 'snake', 'dog', 'cat'])
+>>> for word in sorted(fdist):
+...    print('{}->{};'.format(word, fdist[word]), end=' ')
+cat->3; dog->4; snake->1;
+

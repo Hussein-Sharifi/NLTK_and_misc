@@ -1,0 +1,10 @@
+Okay great. Now let's make use of tags to predict possibilities for the next word's tag. We want to create a dictionary where each key is a tuple (tag1, word2), and its value is a dictionary with possible tags as keys. Each key returns a 
+count of that tag 
+
+pos = defaultdict(lambda: defaultdict(int)): this is a dictionary whose keys are dictionaries st pos[key1][key2] = 0
+tagged_text = brown.tagged_words(categories = 'news', tagset = 'universal')
+for (w1, t1), (w2, t2) in in nltk.bigrams(tagged_text):
+    pos[(t1, w2)][t2] += 1
+>>> pos[('DET', 'right')] [3]
+defaultdict(<class 'int'>, {'ADJ': 11, 'NOUN': 5})
+

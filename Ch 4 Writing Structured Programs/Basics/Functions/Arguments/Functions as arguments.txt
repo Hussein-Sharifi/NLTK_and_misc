@@ -1,0 +1,11 @@
+This example takes the argument *prop* and uses it as a function to process sent:
+
+>>> sent = ['Take', 'care', 'of', 'the', 'sense', ',', 'and', 'the',
+...         'sounds', 'will', 'take', 'care', 'of', 'themselves', '.']
+>>> def extract_property(prop):
+...     return [prop(word) for word in sent]
+...
+>>> extract_property(len)
+[4, 4, 2, 3, 5, 1, 3, 3, 6, 4, 4, 4, 2, 10, 1]
+
+

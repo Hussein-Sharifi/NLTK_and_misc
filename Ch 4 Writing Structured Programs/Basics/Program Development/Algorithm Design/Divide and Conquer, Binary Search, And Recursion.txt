@@ -1,0 +1,5 @@
+One popular method for processing data efficiently is Divide and Conquer: split data of size n into two n/2 datasets, and repeat. Process each dataset and merge it all back together. 
+
+One example of this is searching a dictionary by opening in the middle. If the word we care about is in the first half, we split that one in half and so on.
+
+Recursion works nicely with approach. We can often call a function recursively to process a split version of the original dataset. Check Ch4/functions/Recursion Using Yield

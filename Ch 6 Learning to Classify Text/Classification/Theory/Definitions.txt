@@ -1,0 +1,17 @@
+Contextual: instead of extracting features of words, we want features from sentences to capture the context of said
+---------													word. 
+
+Join classifier models: labels a group of related inputs (for example a sentence). This is used to capture
+----------------------					dependencies between related classification tasks
+
+Consecutive classification or Greedy Sequence Classification: find most likely class of first input, the most likely
+------------------------------------------------------------  follow-up to input, and keep repeating until end sent.
+
+One problem with the above approach is that any mistakes we make are going to amplify down the chain. One way to 
+improve this approach is by using Transformational joint taggers, which create an initial assignment for the inputs,
+then iteratively refine that assignment to repair inconsistencies between related inputs. The Brill tagger works
+this way.
+
+Another approach is to assign scores to each possible sequence of tags, and choose the one with the highest overall
+score. Models that use this approach are: Hidden Markov Models, Maximum Entropy Markov Models, and Linear-Chain
+Conditional Random Field Models.

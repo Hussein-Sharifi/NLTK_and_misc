@@ -1,0 +1,20 @@
+A unitagger only considers the word of interest. Therefore the only possible model is to assign the word its most 
+likely tag. An n-gram tagger, unlike a unitagger, takes into consideration the part of speech tags of the n-1
+preceding tokens.
+
+a 1-gram tagger is known as a unitagger, a 2-gram tagger is known as a bigram tagger, a 3-gram tagger trigram tagger.
+
+Problem with n-gram taggers is when they deal with patterns they haven't seen before. The larger the dataset, the
+better the accuracy. This is known as the precision/recall trade-off and is a big issue in NLP.
+
+Why are n-gram taggers trained with tagged_sents? Because they should not consider context that crosses a sentence
+boundary. Accordingly, NLTK taggers are designed to work with lists of sentences, where each sentence is a list of
+words.
+
+
+
+
+eg: bigram tagger
+-----------------
+
+nltk.BigramTagger(gold tagged sents).tag(word_tokens)

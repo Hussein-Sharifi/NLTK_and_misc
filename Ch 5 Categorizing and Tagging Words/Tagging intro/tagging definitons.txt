@@ -1,0 +1,29 @@
+Part-of-speech tagging: classifying words into parts of speech into word classes (AKA lexical categories)
+
+*Articles is same class as determiners (a, the)
+*modals (should, may)
+*personal pronouns (she, they)
+
+tagset: collection of tags used for a text
+
+CC: coordinating conjunction (such as 'and')
+RB: adverb
+IN: preposition
+NN: noun
+NP: noun proper
+JJ: adjective
+PRP: pronoun, personal
+VB: verb, base form
+VBP: verb, present tense, not 3rd person singular
+VBN: verb, present participle
+TO: to
+DT: determiner (such as 'the')
+
+Unsimplified tags: contain info such as $ for possessive (NN$ is possessive pronoun), S for plural, P for proper, -NC for citations, -HL for headlines, -TL for titles.
+
+
+*NLTK provides documentation for each tag, which can be queried using the tag, e.g. nltk.help.upenn_tagset('RB'), or a regular expression, e.g. nltk.help.upenn_tagset('NN.*'). Some corpora have README files with tagset documentation, see nltk.corpus.???.readme(), substituting in the name of the corpus.
+
+
+nltk.help.upenn_tagset('NN.*')
+nltk.help.brown_tagset('VB.*')

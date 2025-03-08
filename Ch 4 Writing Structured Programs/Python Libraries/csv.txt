@@ -1,0 +1,17 @@
+import csv
+
+*data tabulations for lexical entries. Should look like:
+
+sleep, sli:p, v.i, a condition of body and mind ...
+walk, wo:k, v.intr, progress by lifting and setting down each foot ...
+wake, weik, intrans, cease to sleep
+
+eg:
+
+>>> import csv
+>>> input_file = open("lexicon.csv", "rb") [1]
+>>> for row in csv.reader(input_file): [2]
+...     print(row)
+['sleep', 'sli:p', 'v.i', 'a condition of body and mind ...']
+['walk', 'wo:k', 'v.intr', 'progress by lifting and setting down each foot ...']
+['wake', 'weik', 'intrans', 'cease to sleep']

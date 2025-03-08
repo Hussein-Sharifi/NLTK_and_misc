@@ -1,0 +1,18 @@
+nltk.Index((key as a function of w, value as a function of w) for w in text) 
+
+
+nltk.Index is a defaultdict(list) with extra support for initialization. Similarly, nltk.FreqDist is essentially a defaultdict(int) with extra support for initialization (along with sorting and plotting methods).
+
+
+eg:
+---
+
+>>> anagrams = defaultdict(list)
+>>> for word in words:
+...     key = ''.join(sorted(word))
+...     anagrams[key].append(word)
+...
+
+Is equivalent to 
+
+anagrams = nltk.Index((''.join(sorted(word)), word) for word in words)

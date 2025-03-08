@@ -1,0 +1,2 @@
+Taggers take time to train. Instead of training our tagger each time, we can train it once and save the output. For details 
+on how to do this, look at AI intro > Saving function outputs

@@ -1,0 +1,3 @@
+This function has no return value. It modifies the parameter the user inputs:
+>>> def my_sort1(mylist):
+...     mylist.sort()

@@ -1,0 +1,51 @@
+Finding current directory
+-------------------------
+
+To find current directory:
+import os
+cwd = os.getcwd()
+
+To check files in current directory:
+import os
+os.listdir()
+___________________________________________________________________________________________________________________
+
+Opening files
+-------------
+
+Once you have file in the right directory:
+f = open('filename.___')
+raw = f.read() OR f.readlines(), which creates a list with a separate string for each line
+
+if open() doesn't work, it might be a formatting issue. use this for universal formatting:
+open('filename.___', 'rU')
+
+___________________________________________________________________________________________________________________
+
+Copying path into python
+------------------------
+
+check the file's path using right click > properties
+double every slash in the path (because \ bypasses function in Python, you want to bypass bypassing function..)
+f = open(path)
+f.read()
+
+
+__________________________________________________________________________________________________________________
+
+Finding absolute path from python
+---------------------------------
+
+import os
+os.path.abspath(input_file.name) 
+
+
+.__file__ returns module file location
+eg:
+>>> nltk.metrics__file__
+'/usr/lib/python2.5/site-packages/nltk/metrics/distance.pyc'
+
+
+
+adding a _ in front of a module hides it in the package. so if I do from package import all, _examplefunct() won't
+													     load.

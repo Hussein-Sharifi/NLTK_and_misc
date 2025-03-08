@@ -1,0 +1,16 @@
+Kitchen-sink approach
+---------------------
+
+*extract a bunch of features and check which are best at prediction using various accuracy checks, trial and error, 
+and nltk.classify.show_most_informative_features(n)
+
+
+Error analysis using development set approach
+---------------------------------------------
+
+*Instead of splitting dataset intro train and test, we split into development set and test. Development set is split
+into train and devtest. Now we can train the model using the train set, test it on the devtest and make a list of
+errors. We can then analyze these errors, try to spot patterns, then improve our feature function. Rinse and 
+repeat, BUT: 
+
+***choose a different development set each time, and MAKE SURE test stays separate the whole time.

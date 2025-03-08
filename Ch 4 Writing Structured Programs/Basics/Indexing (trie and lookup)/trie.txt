@@ -1,0 +1,12 @@
+A letter trie is a data structure that can be used for indexing a lexicon, one letter at a time.
+
+Let's construct one for French translation:
+
+def insert(trie, key, value):
+    if key:
+        first, rest = key[:1], key[1:]
+        if first not in trie:
+            trie[first] = {}
+        insert(trie[first], rest, value)
+    else:
+        trie['value'] = value

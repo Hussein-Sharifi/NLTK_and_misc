@@ -1,0 +1,6 @@
+nltk.BigramTagger(training set, cutoff = n, backoff = model)
+nltk.NgramTagger(N, training_set, cutoff=, backoff=)
+
+
+cutoff tells function that if it sees a given pattern less than n times, it should discard that training instance.
+

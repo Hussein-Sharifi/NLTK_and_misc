@@ -1,0 +1,70 @@
+Conditional Frequency Distributions: nltk.ConditionalFreqDist()
+
+*This is a collection of FreqDists, each for a different 'condition', usually a category. Remember: you can use FreqDists
+to count occurrences of letters, words, sents, etc. depending on tokenization
+
+_________________________________________________________________________________________________________
+Arguments:
+
+It processes a sequence of pairs of the form ('condition', 'word') instead of a sequence of words:
+text = ['The', 'Fulton', 'County', 'Grand', 'Jury', 'said', ...]
+pairs = [('news', 'The'), ('news', 'Fulton'), ('news', 'County'), ...]
+and counts the occurrences of each of these pairs. For a pair (x1,x2), x2 is plotted on the x-axis, the y-axis is the number of occurrences of each pair, and x1 is the condition, distinguished by the color of curve graphed. x1 is known as the condition.
+
+Can also process strings of length 2 instead of 2-tuples: ['na', 'ki' ,'to', 'si']. It treats this like [('n', 'a'), ...]
+
+Ex:
+>>> from nltk.corpus import brown
+>>> cfd = nltk.ConditionalFreqDist(
+...           (genre, word)
+...           for genre in brown.categories()
+...           for word in brown.words(categories=genre))
+
+Ex:
+>>> genre_word = [(genre, word)
+...               for genre in ['news', 'romance']
+...               for word in brown.words(categories=genre)] [3]
+>>> len(genre_word)
+170576
+>>> cfd = nltk.ConditionalFreqDist(genre_word)
+>>> cfd
+<ConditionalFreqDist with 2 conditions>
+>>> cfd.conditions()
+['news', 'romance'] # [_conditions-cfd]
+>>> print(cfd['news'])
+<FreqDist with 14394 samples and 100554 outcomes>
+>>> print(cfd['romance'])
+<FreqDist with 8452 samples and 70022 outcomes>
+>>> cfd['romance'].most_common(20)
+[(',', 3899), ('.', 3736), ('the', 2758), ('and', 1776), ('to', 1502),
+('a', 1335), ('of', 1186), ('``', 1045), ("''", 1044), ('was', 993),
+('I', 951), ('in', 875), ('he', 702), ('had', 692), ('?', 690),
+('her', 651), ('that', 583), ('it', 573), ('his', 559), ('she', 496)]
+>>> cfd['romance']['could']
+193
+
+___________________________________________________________________________________________________
+
+Plotting/Tabulating: you can use plot() or tabulate() with conditions = ['cond1', 'cond2']. sample = range(a,b) to limit x-axis. cumulative = True for cumulative data.
+
+Usually there are too many words to plot. So maybe plot a group of target words, or some property of the text.
+
+Ex: '
+>>> from nltk.corpus import inaugural
+>>> cfd = nltk.ConditionalFreqDist(
+...           (target, fileid[:4]) [1]
+...           for fileid in inaugural.fileids()
+...           for w in inaugural.words(fileid)
+...           for target in ['america', 'citizen'] [2]
+...           if w.lower().startswith(target))
+
+Ex:
+>>> from nltk.corpus import udhr
+>>> languages = ['Chickasaw', 'English', 'German_Deutsch',
+...     'Greenlandic_Inuktikut', 'Hungarian_Magyar', 'Ibibio_Efik']
+>>> cfd = nltk.ConditionalFreqDist(
+...           (lang, len(word)) [1]
+...           for lang in languages
+...           for word in udhr.words(lang + '-Latin1'))
+
+

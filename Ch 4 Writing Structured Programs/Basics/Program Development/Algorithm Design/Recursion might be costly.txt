@@ -1,0 +1,17 @@
+Recursion is sometimes costly because: 
+
+*It has to save data to a stack for each recursive step, eventually coming back to resolve it.
+*It might have to compute subbranches multiple times. Look at dynamic programming as an example and how to avoid
+
+
+When reusing lots of values, try:
+
+from nltk import memorize
+@memoize
+.
+.
+.
+functions and whatever else in program
+.
+.
+.

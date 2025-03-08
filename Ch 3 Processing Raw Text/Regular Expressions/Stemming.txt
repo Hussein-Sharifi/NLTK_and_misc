@@ -1,0 +1,60 @@
+nltk ready-made stemmers:
+[nltk.PorterStemmer().stem(w) for w in text]
+[nltk.LancasterStemmer().stem(w) for w in text]
+[nltk.WordNetLemmatizer().lemmatize(w) for w in text]
+
+
+*stemmers are kinda inaccurate. Try it out, see which works best.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What if we try to create our own stemming process? This  is annoying. Look at those examples
+
+
+>>> re.findall(r'^.*(ing|ly|ed|ious|ies|ive|es|s|ment)$', 'processing')
+['ing']
+Here, re.findall() just gave us the suffix even though the regular expression matched the entire word. This is because the parentheses have a second function, to select substrings to be extracted. If we want to use the parentheses to specify the scope of the disjunction, but not to select the material to be output, we have to add ?:, which is just one of many arcane subtleties of regular expressions. Here's the revised version.
+
+ 	
+>>> re.findall(r'^.*(?:ing|ly|ed|ious|ies|ive|es|s|ment)$', 'processing')
+['processing']
+However, we'd actually like to split the word into stem and suffix. So we should just parenthesize both parts of the regular expression:
+
+ 	
+>>> re.findall(r'^(.*)(ing|ly|ed|ious|ies|ive|es|s|ment)$', 'processing')
+[('process', 'ing')]
+This looks promising, but still has a problem. Let's look at a different word, processes:
+
+ 	
+>>> re.findall(r'^(.*)(ing|ly|ed|ious|ies|ive|es|s|ment)$', 'processes')
+[('processe', 's')]
+The regular expression incorrectly found an -s suffix instead of an -es suffix. This demonstrates another subtlety: the star operator is "greedy" and the .* part of the expression tries to consume as much of the input as possible. If we use the "non-greedy" version of the star operator, written *?, we get what we want:
+
+ 	
+>>> re.findall(r'^(.*?)(ing|ly|ed|ious|ies|ive|es|s|ment)$', 'processes')
+[('process', 'es')]
+This works even when we allow an empty suffix, by making the content of the second parentheses optional:
+
+ 	
+>>> re.findall(r'^(.*?)(ing|ly|ed|ious|ies|ive|es|s|ment)?$', 'language')
+[('language', '')]
+This approach still has many problems (can you spot them?) but we will move on to define a function to perform stemming, and apply it to a whole text:
+
+>>> def stem(word):
+...     regexp = r'^(.*?)(ing|ly|ed|ious|ies|ive|es|s|ment)?$'
+...     stem, suffix = re.findall(regexp, word)[0]
+...     return stem
+...

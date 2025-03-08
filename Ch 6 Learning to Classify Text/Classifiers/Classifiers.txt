@@ -1,0 +1,10 @@
+nltk.NaiveBayesClassifier.train(train_set), where train_set has (features, class) tuples for each datapoint.
+------------------------------------------
+
+
+nltk.DecisionTreeClassifier.train(train_set)
+--------------------------------------------
+*has method pseudocode(depth=n). print it to see simplified conditional rules classifier figures out.
+
+
+nltk.MaxentClassifier.train(train_data, algorithm="gis", max_iter=10)

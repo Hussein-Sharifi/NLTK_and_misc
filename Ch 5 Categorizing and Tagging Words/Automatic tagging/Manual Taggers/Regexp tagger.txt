@@ -1,0 +1,20 @@
+nltk.RegexpTagger(patterns), where patterns looks like:     ***these are processed in order. Also runs kinda slow
+
+patterns = [
+     (r'.*ing$', 'VBG'),                # gerunds
+     (r'.*ed$', 'VBD'),                 # simple past
+     (r'.*es$', 'VBZ'),                 # 3rd singular present
+     (r'.*ould$', 'MD'),                # modals
+     (r'.*\'s$', 'NN$'),                # possessive nouns
+     (r'.*s$', 'NNS'),                  # plural nouns
+     (r'^-?[0-9]+(\.[0-9]+)?$', 'CD'),  # cardinal numbers
+     (r'.*', 'NN')                      # nouns (default)
+ ]
+
+________________________________________________________________________________________________
+
+eg:
+---
+
+same patterns as above
+nltk.RegexpTagger(patterns).tag(word tokens)

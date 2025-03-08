@@ -1,0 +1,20 @@
+Thinking of utterances as action types is a useful first step to processing dialogue. We're looking at the NPS
+Chat Corpus and identifying with 15 action types, such as statement, emotion, ynQuestion, and continuer. The
+corpus is labeled according to these classes, which we can access using post.get('class'), and we can access
+the text using post.text(). First, we need to extract the data:
+
+posts = nltk.corpus.nps_chat.xml_posts()[:10000]
+
+def dialogue_features(post):
+    features = {}
+    for w in nltk.word_tokenize(post):
+        features[f'contains ({w.lower()})'] = True
+    return features
+
+featuresets = [ ( dialogue_features(post.text), post.get('class') )
+                for post in posts]
+ninety = int( len(featuresets) * .9 )
+train_set, test_set = featuresets[:ninety], featuresets[ninety:]
+
+classifier = nltk.NaiveBayesClassifier.train(train_set)
+nltk.classify.accuracy(classifier, test_set)

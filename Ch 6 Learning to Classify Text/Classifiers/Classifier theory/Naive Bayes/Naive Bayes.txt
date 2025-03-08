@@ -1,0 +1,105 @@
+*Assumes all events are independent. Then simply assigns feature set X to the most frequent class C exhibiting those features.
+
+*Types of Naive Bayes Models:
+
+1: Gaussian Naive Bayes: Assumes features follow a normal distribution.
+
+2: Multinomial Naive Bayes: Used for discrete data like word counts in text classification.
+
+3: Bernoulli Naive Bayes: Used for binary/boolean data.
+
+*When working with probabilities, you have a lot of numbers between 0 and 1. Naive bayes involves a lot of
+multiplication, which might lead to numbers so small that they underflow (i.e., they become indistinguishable from
+0 in computer calculations). For this reason, it can be better to use log scale instead, which converts
+multiplication to addition.
+
+___________________________________________________________________________________________________________________
+
+
+How it works
+------------
+
+
+Prior probability of l: total frequency of label l in the dataset
+
+You start out with prior probability of a label, and then each feature 'votes against' that label. The likelihood
+score for each label is reduced by multiplying it by the probability that an input value with that label would have
+the feature
+
+
+1) note that P(label|features) is equal to the probability that an input has a particular label AND the specified set
+of features, divided by the probability that it has the specified set of features:
+
+	P(label|features) = P(features, label)/P(features)
+
+2) note that P(features) will be the same for every choice of label, so if we are simply interested in finding the 
+most likely label, it suffices to maximize P(features, label), which we'll call the LABEL LIKELIHOOD.
+
+
+3) If we want to generate a probability estimate for each label, rather than just choosing the most likely label, 
+then the easiest way to compute P(features) is:
+	
+		P(features) = Σl in| labels P(features, label)
+
+4) The label likelihood can be expanded out as the probability of the label times the probability of the features 
+given the label:
+
+		P(features, label) = P(label) × P(features|label)
+
+5) Furthermore, since the features are all independent of one another (given the label), we can separate out the
+probability of each individual feature:
+
+		P(features, label) = P(label) × Prod f in| featuresP(f|label)`
+
+This is exactly the equation we discussed above for calculating the label likelihood: P(label) is the prior
+probability for a given label, and each P(f|label) is the contribution of a single feature to the label likelihood.
+
+
+6) The simplest way to calculate P(f|label), the contribution of a feature f toward the label likelihood for a
+given label, is to take the percentage of training instances with the given label that also have the given feature:
+
+		P(f|label) = count(f, label) / count(label)
+___________________________________________________________________________________________________________________
+
+Disadvantages
+-------------
+
+A) 
+
+Note in step 6), if a feature f never occurs with a label l, this term becomes 0. Since we're multiplying it
+with everything else, the label likelihood altogether becomes 0. This is a problem. Just because our training set
+doesn't show feature f occurring with label l, doesn't mean it's impossible. We overcome this issue using:
+
+Smoothing Techniques: 
+--------------------
+egs: Expected Likelihood Estimation for the probability of a feature given a label basically adds 0.5 to each 
+count(f,label) value, and the Heldout Estimation uses a heldout corpus to calculate the relationship between
+feature frequencies and feature probabilities. nltk.probability module provides support for a wide variety of
+smoothing 	  										techniques.
+
+
+B) 
+
+We have assumed here that each feature is binary, i.e. that each input either has a feature or does not. Obviously
+some features aren't binary. Here are some ways to get around that:
+
+*Label-valued features (e.g., a color feature which could be red, green, blue, white, or orange) can be converted 
+to binary features by replacing them with binary features such as "color-is-red". This is what we did in applied 
+examples: 	{'next-word-capitalized': tokens[i+1][0].isalpha()}. 
+
+*Numeric features can be converted to binary features by binning, which replaces them with features such as
+												    "4<x<6". 
+
+* Another alternative is to use regression methods to model the probabilities of numeric features. For example, if
+we assume that the height feature has a bell curve distribution, then we could estimate P(height|label) by finding 
+the mean and variance of the heights of the inputs with each label. In this case, P(f=v|label) would not be a fixed 
+value, but would vary depending on the value of v. (Check chat gpt jpegs for more details)
+
+
+C)
+
+Since Naive Bayes assumes features are independent, it might 'double count' highly correlated features'
+contributions for a given class labels. Try to avoid highly correlated features such as ends-with(a) and 
+ends-with(vowel)
+
+Another solution is to consider possible interactions and adjust an added weighting term for each contribution.

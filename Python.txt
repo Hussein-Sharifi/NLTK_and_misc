@@ -1,0 +1,158 @@
+int, float, str, list: example of list I = ["apple", "banana"]. You can create a list using a logical expression: squares = [x**2 for x in range(10)]
+                                                                                                             or consider    [(x, y) for x in [1,2,3] for y in [3,1,4] if x != y]
+f string: f"a string goes in here" 											  = [(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]
+
+dict: d = {'jack': 4098, 'sjoerd': 4127}. d['jack'] gives 4098.
+has form {key: object}, where key must be immutable and object can be any type
+more on dicts https://docs.python.org/3/tutorial/datastructures.html
+
+tuple: eg:  t = (1, 3, 'door'). 
+(a, b, c) = t assigns each variable to the positionally respective component
+
+set: {object1, object2, ...}
+set('word') = {'w', 'o', 'r', 'd'}
+a = {x for x in 'abracadabra' if x not in 'abc'} gives a = {'r', 'd'}
+
+f string: f'blah blah {var1} said {var2}'
+
+for, if, while loops
+conditions can be combined with and, or, or for example a<b==d
+can use in, not in, is, is not as conditions
+
+elif (must be same indentation as parent if-statement)
+
+
+
+try:
+	___
+except:
+	___
+finally:
+	___
+
+
+list()
+
+listname.copy
+
+list.append(x). Other list.functions: https://docs.python.org/3/tutorial/datastructures.html
+
+list(enumerate(list.object))
+
+range(start, end, step) or just range(end) 
+
+break, continue, pass
+
+match()
+
+input('prompt')
+
+in
+
+zip(): https://docs.python.org/3/library/functions.html#zip
+
+reversed(object)
+
+sorted(object)
+
+set(object)
+
+____________________________________________________________________________________________________________________________________________________________________________________
+
+
+                                      these guys are optional but have unique properties and can be useful. Check 4.82 https://docs.python.org/3/tutorial/controlflow.html
+def Function_Name(input1, input2,..., *second to last input, **last input)
+	"""Optional 'documentation string' describing the purpose of the function. first line is summary
+
+		additional info here. Second line must be blank"""
+	
+methods: example: list_name.append(): the .append is called a method of a list. It is a built-in function defined for a particular type, in this case a list.
+
+_________________________________________________________________________
+example for defining a class of objects with methods and match statement
+
+class Point:
+    __match_args__ = ('x', 'y')
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+c = Point(0,5)
+
+
+def where_is(point):
+	match points:
+    	case []:
+        	print("No points")
+    	case [Point(0, 0)]:
+        	print("The origin")
+    	case [Point(x, y)]:
+        	print(f"Single point {x}, {y}")
+    	case [Point(0, y1), Point(0, y2)]:
+        	print(f"Two on the Y axis at {y1}, {y2}")
+    	case _:
+        	print("Something else")
+
+
+			you can also include if statement:
+
+	match point:
+    	case Point(x, y) if x == y:
+        	print(f"Y=X at {x}")
+    	case Point(x, y):
+        	print(f"Not on the diagonal")
+
+Another example: 
+
+class Person:
+
+	def __init__(self, name):
+		self.name = name
+
+	def say_hi(self):
+		print('Hello, my name is', self.name)
+
+
+p = Person('Nikhil')
+p.say_hi()
+Hello, my name is Nikhil
+
+review more on match statements here https://docs.python.org/3/tutorial/controlflow.html
+_______________________________________________________________________________________________________________________________________________________________________________________________________________
+
+
+
+
+'string' < 'other string' to compare alphabetical order letter by letter. can also compare lists and tuples
+
+module: import name.py  # now you can call any functions in the imported file using name.functionName. really you can call anything if you precede it with the module's name.
+
+module.__name__ returns module name
+
+from module_name import thing1, thing2 # will actually bring thing1 and thing2 into current module. i.e. you can call them
+without preceding them with module name
+
+from modname import *  # imports everything except names beginning with __ in modname, directly and without defining modname itself.
+
+from modname import thing as newthing # changes thing to newthing as it imports it
+
+the imports are only computed once. If you want to mess with the import and not have to restart to load the changes,
+use importlib.reload()
+
+dir(modname) shows everything defined in that module. dir() shows everything currently defined.
+*it doesn't actually list all built-in functions
+
+
+when opening a file, use 
+
+with open("myfile.txt") as f:
+    for line in f:
+        print(line, end="")
+
+to correctly close the file afterward
+
+
+exceptions and exception groups https://docs.python.org/3/tutorial/errors.html
+
+
+stuff i don't understand: 6.1, 6.4-chapter end: creating packages and virtual environments.

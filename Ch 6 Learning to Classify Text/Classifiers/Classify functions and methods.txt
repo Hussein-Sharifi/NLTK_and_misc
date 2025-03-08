@@ -1,0 +1,22 @@
+nltk.classify.apply_features(gender_features, labeled_names)
+
+
+
+
+
+
+
+
+
+classify(features)
+show_most_informative_features(n)
+
+
+
+nltk.classify.accuracy(classifier, test_set)
+--------------------------------------------
+
+
+
+nltk.classify.apply_features(gender_features, labeled_names)
+------------------------------------------------------------

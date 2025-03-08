@@ -1,0 +1,51 @@
+important egs:
+------------
+
+Let's get rid of all vowels in the middle for a text:
+text = nltk.book.text1
+reg_exp = r'^[aeiouAEIOU]+|[aeiouAEIOU]+$|[^aeiouAEIOU]'
+def compress(word):
+	pieces = re.findall(reg_exp, word)
+	return ''.join(pieces)
+compressed = [compress(w) for w in text]
+
+Let's find most common 2 or more consecutive vowels in a text:
+>>>fd = nltk.FreqDist(vowels for word in nltk.book.text1 for vowels in re.findall(r'[aeiou]{2,}', word))
+>>> fd.most_common(20)
+[('ou', 7793), ('ea', 6383), ('ee', 4229), ('ai', 3350), ('oo', 2736), ('ie', 1923), ('io', 1587), ('ei', 1331), ('oa', 1275), ('ia', 988), ('ue', 892), ('oi', 774), ('au', 535), ('ua', 496), ('iou', 494), ('ui', 487), ('oe', 343), ('uee', 337), ('uo', 227), ('eo', 151)]
+
+Let's make a table with vowel sequences for Hungarian words:
+regexp = '(?:a|e|i|o|u|ő|é|á|ü|ó){2,3}'
+text = nltk.corpus.udhr.words('Hungarian_Magyar-Latin1')
+x = re.findall(regexp, ' '.join(text))
+cfd = nltk.ConditionalFreqDist(x)
+cfd.tabulate()
+
+This program processes each word w in turn, and for each one, finds every substring that matches the regular expression «[ptksvr][aeiou]». In the case of the word kasuari, it finds ka, su and ri. Therefore, the cv_word_pairs list will contain ('ka', 'kasuari'), ('su', 'kasuari') and ('ri', 'kasuari'). One further step, using nltk.Index(), converts this into a useful index.
+
+>>>cv_word_pairs = [(cv, w) for w in rotokas_words
+...                          for cv in re.findall(r'[ptksvr][aeiou]', w)]
+>>> cv_index = nltk.Index(cv_word_pairs)
+>>> cv_index['su']
+['kasuari']
+>>> cv_index['po']
+['kaapo', 'kaapopato', 'kaipori', 'kaiporipie', 'kaiporivira', 'kapo', 'kapoa',
+'kapokao', 'kapokapo', 'kapokapo', 'kapokapoa', 'kapokapoa', 'kapokapora', ...]
+__________________________________________________________________________________________________________________________
+
+
+
+understanding raw strings, re.search vs re.findall:
+--------------------------------------------------
+
+raw string: avoids special functions. For example: print('\b') just prints a backspace, whereas print(r'\b') prints \b
+
+re.search vs re.findall: 
+-----------------------
+let x = 'cat and bat and cat'
+re.search('cat', x) matches only the first cat: print(re.search('cat',x).group()) returns cat
+re.findall('cat', x) matches both: print(re.findall('cat', x)) returns ['cat', 'cat']
+
+_______________________________________________________________________________________________________________________
+
+

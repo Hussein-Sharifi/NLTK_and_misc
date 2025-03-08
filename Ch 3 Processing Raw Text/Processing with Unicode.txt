@@ -1,0 +1,17 @@
+Some encodings (such as ASCII and Latin-2) use a single byte per code point, so they can only support enough for a single language.
+
+Unicode on the other hand, supports over a million characters. NOT THE SAME AS UTF-8
+
+Represented in python as '\uXXXX', a 4-digit hexadecimal form.
+_________________________________________________________________________________________________________________________
+
+Decoding: most language online is stored in a different format. Translating it into Unicode is called decoding.
+Encoding: translating from Unicode to the desired format.
+Glyphs: yk what those are.
+
+Decoding example:
+
+path = nltk.data.find(file)
+f = open(path, encoding='latin2')
+
+To convert non-ASCII characters to code form: print(string.encode('unicode_escape'))

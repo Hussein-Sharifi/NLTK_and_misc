@@ -1,0 +1,13 @@
+Definitions:
+
+Stylistics: a type of linguistic inquiry concerned with differences between categories.
+
+Module: a collection of functions you can call in an interpreter. eg: nltk.corpus.brown
+Package: a collection of modules: eg. nltk.corpus
+Library: a collection of packages eg. nltk
+
+Lexicon: a collections of words/phrases with associated linguistic information
+
+word token vs word type: word tokens are each occurrence of every word. word types is the set of the vocabulary with no duplicates
+
+normalizing text: for example using w.lower() to normalize words to lower case. A further step would be stripping of affixes, AKA stemming. Then turning it into a dictionary, AKA lemmatization 

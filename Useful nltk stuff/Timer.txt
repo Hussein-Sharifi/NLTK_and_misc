@@ -1,0 +1,23 @@
+from timeit import Timer
+
+Timer(stmt given as string, setup stmt given as string)
+methods:
+.timeit(# of runs)
+
+
+*two notes: 
+1: Timer runs stmt and setup stmt in separate environments and so it needs packages imported for each statement.
+2: You can run two commands in one line by using ;. Example: print(5); print(1) will return as if each was entered on its
+own line
+
+
+eg:
+from timeit import Timer
+
+vocab_size = 100000
+setup_list = 'import random; vocab = list(range({}))'.format(vocab_size)
+setup_set = 'import random; vocab = set(range({}))'.format(vocab_size)
+statement = 'random.randint(0, {})'.format(vocab_size*2)
+
+print(Timer(statement, setup_list).timeit(1000))
+print(Timer(statement, setup_set).timeit(1000))

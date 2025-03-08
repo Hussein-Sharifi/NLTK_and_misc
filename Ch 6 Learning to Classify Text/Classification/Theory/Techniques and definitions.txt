@@ -1,0 +1,30 @@
+Feature names: some feature of the input that we think will help us predict its class, along with its associated 
+-------------  												   value.
+Eg:
+If our inputs are names, we might consider the feature name 'last_letter' = 'x' 
+
+
+Feature set: a dictionary mapping feature names to their values.
+-----------
+Eg:
+{'last_letter': 'k', 'first_letter', 'A', 'name_length' = 5}
+
+
+
+
+
+
+
+
+
+
+
+_____________________________________________________________________________________________________________________
+Techniques
+----------
+
+*When working with large datasets, creating a feature_set takes up large amounts of memory. There is an nltk function
+that does this more efficiently:
+
+nltk.classify.apply_features(feature_function, labeled_data)
+

@@ -1,0 +1,39 @@
+movie_review categorizes reviews as positive or negative. We can use this dataset to practice classification.
+Our plan is to develop a dataset that (review, category) tuples. Process through all words in the corpus using
+FreqDist and keep the 2000 most common ones. Then, create a feature dict of the form {'contains(word)': True/False} We'll train naivebayes to predict positive/negative sentiment based on contained words
+
+
+
+from nltk.corpus import movie_reviews
+
+documents = [ (list(movie_reviews.words(fileid)), category)
+             for category in movie_reviews.categories()
+             for fileid in movie_reviews.fileids(category)]
+random.shuffle(documents)
+
+all_words = nltk.FreqDist(w.lower() for w in movie_reviews.words())
+word_features = list(all_words)[:2000]
+
+def document_features(document):
+    features = {}
+    document_words = set(w.lower() for w in document)
+    for word in word_features:
+         features[f'contains({word})'] = word in document_words
+    return features
+
+feature_set = nltk.classify.apply_features(document_features, documents)
+>>> len(feature_set)
+2000
+train_set, test_set = feature_set[:1700], feature_set[1700:]
+
+classifier = nltk.NaiveBayesClassifier.train(train_set)
+>>> nltk.classify.accuracy(classifier, test_set)
+0.76
+
+>>> classifier.show_most_informative_features(5)
+Most Informative Features
+         contains(mulan) = True              pos : neg    =     11.9 : 1.0
+   contains(outstanding) = True              pos : neg    =     11.6 : 1.0
+        contains(seagal) = True              neg : pos    =      9.6 : 1.0
+         contains(damon) = True              pos : neg    =      7.8 : 1.0
+   contains(wonderfully) = True              pos : neg    =      7.0 : 1.0

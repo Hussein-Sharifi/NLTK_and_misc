@@ -1,0 +1,46 @@
+We're actually going to create a class here
+
+def pos_features(i, sentence, history):
+    features = {'suffix1': sentence[i][-1:],
+                'suffix2': sentence[i][-2:],
+                'suffix3': sentence[i][-3:]}
+    if i == 0:
+        features['prev_word'] = '<START>'
+        features['prev_tag'] = '<START>'
+    else:
+        features['prev_word'] = sentence[i-1]
+        features['prev_tag'] = history[i-1]
+    return features
+
+class ConsecutivePosTagger(nltk.TaggerI):
+\
+    def __init__(self, train_sents):
+        train_set = []
+        for sent in train_sents:
+            untagged_sent = nltk.tag.untag(sent)
+            history = []
+            for i,(w,t) in enumerate(sent):
+                feature_set = pos_features(i, untagged_sent, history)
+                train_set.append( (feature_set, t))
+                history.append(t)
+        self.classifier = nltk.NaiveBayesClassifier.train(train_set)
+\
+    def tag(self, sent):
+        history = []
+        for i,w in enumerate(sent):
+            feature_set = pos_features(i, sent, history)
+            tag = self.classifier.classify(feature_set)
+            history.append(tag)
+        return zip(sent, history)
+
+tagged_sents = brown.tagged_sents(categories = 'news')
+ninety = int(len(tagged_sents)*0.9)
+train_sents, test_sents = tagged_sents[:ninety], tagged_sents[ninety:]
+
+tagger = ConsecutivePosTagger(train_sents)
+tagger.accuracy(test_sents)
+
+_____________________________________________________________________________________________________________________
+
+Notes: Tagger1 has method accuracy, which automatically calls Tagger1.tag. We replaced this method with our own,
+custom tag method, which gets called because it comes first in order of resolution (it's in the local scope).

@@ -1,0 +1,40 @@
+Known as associative arrays or hash arrays in other languages
+sets can be represented as 2-tuples or key: value
+
+*Methods
+
+d[key]
+d.get(key, return value if key is not found): returns value of key
+d.pop(key, return value if key is not found): returns value of key and removes it from dict
+d.setdefault(key, default):		      returns value of key if it exists, otherwise inserts it with 													     value=default   
+del d[key]
+d.clear()
+d.update(dict or 2-tuples)
+d.keys()
+d.values()
+d.items(): both keys and values
+
+_________________________________________________________________________________________________________________
+You can define dicts in the following ways:
+
+*list comprehensions:
+d = {len(x): x for x in text[:10]}
+squares = {x: x**2 for x in range(1, 6)}
+
+*using enumerate:
+d = dict(enumerate(list))
+
+*using loops:
+d = {}
+for i in range(10):
+    d[i] = text[i]
+
+*manually:
+d = {'colorless': 'ADJ', 'ideas': 'N', 'sleep': 'V', 'furiously': 'ADV'}
+d = dict(colorless='ADJ', ideas='N', sleep='V', furiously='ADV')
+
+____________________________________________________________________________________________________________________
+
+*1 in d checks if the index 1 is in d.
+
+*dict keys must be immutable type

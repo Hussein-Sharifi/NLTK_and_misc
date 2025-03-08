@@ -1,0 +1,13 @@
+nltk.UnigramTagger(gold tagged sents).tag(word_tokens)
+
+Explanation
+
+this trains the unigram tagger using a tagged dataset, hopefully a gold standard one. Again, this tagger works
+by assigning each word its most likely tag using some statistically generated dictionary model. 
+
+eg:
+---
+
+gold = brown.tagged_sents(categories = 'news')
+unigram_tagger = nltk.UnigramTagger(gold)
+unigram_tagger.tag(word tokens)

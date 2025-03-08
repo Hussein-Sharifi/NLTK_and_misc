@@ -1,0 +1,24 @@
+Tags every token with same tag:
+
+nltk.DeafultTagger('NN')
+
+
+
+methods
+-------
+
+tag(word tokens)
+
+accuracy(control tagged sents): returns probability of correct tag
+
+*** NO LONGER IN USE: evaluate(control tagged sents): returns probability of correct tag
+
+
+
+__________________________________________________________________________________________________________________
+eg:
+--
+
+tokens = nltk.word_tokenize(raw)
+default_tagger = nltk.DefaultTagger('NN')
+default_tagger.tag(tokens)

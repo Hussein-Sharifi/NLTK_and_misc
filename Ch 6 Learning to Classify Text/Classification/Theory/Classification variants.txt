@@ -1,0 +1,12 @@
+Basic classification: each input treated separately. Goal is to correctly assign a single class label
+
+Multi-class classification: similar but with multiple class labels being assigned
+
+open-classification: the labels are not pre-determined. They are found during the classification process
+
+Sequence classification: a list of inputs are jointly classified.
+
+
+
+Supervised vs Unsupervised : given correct class labels in the training process vs not
+--------------------------

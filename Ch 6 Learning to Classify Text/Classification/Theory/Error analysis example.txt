@@ -1,0 +1,46 @@
+labeled_names = [(n, 'male') for n in nltk.corpus.names.words('male.txt')] + 
+						[(n, 'female') for n in nltk.corpus.names.words('female.txt')]
+train_names = labeled_names[1500:]
+devtest_names = labeled_names[500:1500]
+test_names = labeled_names[:500]
+
+train_set = nltk.classify.apply_features(feature_funct, train_names)
+devtest_set = nltk.classify.apply_features(feature_funct, devtest_names)
+test_set = nltk.classify.apply_features(feature_funct, test_names)
+
+classifier = nltk.NaiveBayesClassifier.train(train_set)
+print(nltk.classify.accuracy(classifier, devtest_set))
+
+errors = []
+for (n,t) in devtest_names:
+    guess = classifier.classify(feature_funct(n))
+    if guess != t:
+        errors.append( (t, guess, n) )
+
+for (t, g, n) in sorted(errors):
+    print(f'correct={t:<8} guess={g:<8s} name={n:<30}')
+
+
+
+In book example, we get:
+correct=female   guess=male     name=Abigail
+  ...
+correct=female   guess=male     name=Cindelyn
+  ...
+correct=female   guess=male     name=Katheryn
+correct=female   guess=male     name=Kathryn
+  ...
+correct=male     guess=female   name=Aldrich
+  ...
+correct=male     guess=female   name=Mitch
+  ...
+correct=male     guess=female   name=Rich
+...
+
+Note that last two letters suffixes are good predictors: yn tend to be female even though last letter n is usually 
+male. similarly ch tend to be male. Then we can edit our features funct to include both last letter and last two
+letters: 
+
+>>> def gender_features(word):
+...     return {'suffix1': word[-1:],
+...             'suffix2': word[-2:]}

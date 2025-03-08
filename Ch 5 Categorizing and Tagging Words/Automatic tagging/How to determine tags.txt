@@ -1,0 +1,23 @@
+1: Morphological Clues:
+
+egs:
+
+happy --> happiness (ness turns verbs into nouns)
+ing --> turns verb to present participle | turns verb to noun (this is called a gerund)
+
+2: Syntactic Clues
+'to' is often followed by verbs. If not, nouns.
+adjectives often occur before nouns or follow words like 'be' and 'very'
+
+3: Semantic Clues
+i.e. meaning of words. current theory is to treat this approach with suspicion--it doesn't seem to automate well.
+
+4: New Words
+new words tend to be nouns. Nouns are known as an open class for that reason. By contrast, prepositions are a closed
+class and are stable over time.
+
+5: Morphology in Part of Speech Tagsets
+what we've been studying this chapter. We have to use more refined tags than just verb, for example. We use stuff
+like VBZ VBN VBG etc in Brown. Different tagsets will have varying levels of refinement and there is a tradeoff 
+between generality and specificity.
+

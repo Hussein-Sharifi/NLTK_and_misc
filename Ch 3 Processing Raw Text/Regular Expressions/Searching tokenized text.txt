@@ -1,0 +1,24 @@
+text.findall(reg_exp)
+
+This is unique to using findall method with nltk:  <> brackets are used to distinguish tokens. It won't work without that. White space between them is ignored.
+
+>>>moby.findall(r"<a> (<.*>) <man>")
+monied; nervous; dangerous; white; white; white; pious; queer; good;
+mature; white; Cape; great; wise; wise; butterless; white; fiendish;
+pale; furious; better; certain; complete; dismasted; younger; brave;
+brave; brave; brave
+
+*You can only have one set of parentheses, otherwise it's a tuple and tuples are not supported.
+*No parentheses means retrieve whole phrase
+*Each <> is a word token.
+
+__________________________________________________________________________________________________________________
+
+nltk.re_show(p, s): annotates the string s to show every place where pattern p was matched.
+
+<\w*>:  \w here means any word character. specifically: [a-zA-Z0-9_]
+        \W means the complement of \w. Anything that isn't [a-zA-Z0-9_]
+	\s means any space character
+	\S is the complement of s
+        \t means tabs
+	\n means new line

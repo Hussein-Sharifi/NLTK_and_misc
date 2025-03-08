@@ -1,0 +1,9 @@
+>>> import pdb
+>>> import mymodule
+>>> pdb.run('mymodule.myfunction()')
+
+Has a lot of optional commands. Use help(pdb)
+
+
+Regression testing: keeping a stack of testing material against which you can test your output. Python has one:
+http://docs.python.org/library/doctest.html

@@ -1,0 +1,25 @@
+def permutation(seq):
+	if len(seq) <= 1:
+		yield seq
+	else:
+		for perm in permutation(seq[1:]):
+			for i in range(len(perm)+1):
+				yield perm[:i] + seq[0:1] + perm[i:]
+
+How it works:
+
+Suppose seq = 'abc'. Run permutation(seq) and we enter the else clause. 
+
+Step 1: for perm in permutation(seq[1:]) runs the function from beginning with permutation('bc'). 
+
+Step 2: In this run, seq = 'bc'. Again, we enter the else clause and the function runs again with permutation('c').
+
+Step 3: Now, seq = 'c', which activates the if clause yielding 'c'. This is the value of permutation('c'), which is 
+now passed back to the second run.
+
+Step 4: Back to second run. Recall seq = 'bc' here. We can now compute the following: for perm in permutation('c'). 
+The for loop inserts c before and after b. Thus, permutation('bc') = ['bc', 'cb']
+
+Step 5: We're back to the first run, where seq = 'abc'. We can compute for perm in permutation(['bc', 'cb']) 
+
+Step 6: etc.

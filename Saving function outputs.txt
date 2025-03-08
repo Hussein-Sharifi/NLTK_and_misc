@@ -1,0 +1,32 @@
+The process of saving contents to a file is known as serialization. Loading that content back up is called 
+deserialization.
+
+
+
+Serialization 
+-------------
+
+from pickle import dump
+
+output_data = f(arguments)
+with open('FileName.pk1', 'wb') as output_file:
+    dump(output_data, output_file, -1)
+
+
+*recall 'with' lets Python know to close the file after the operation is done. If you're not using 'with', you can
+manually close using output_file.close
+*-1 tells dump to use the latest serialization protocol available (since [-1] is last item in a list)
+*wb tells Python to open the file in binary, which is needed to save the output using dump.
+*If you want to save the file to a different directory, just replace output_data with absolute or relative file path.
+
+
+
+Deserialization
+---------------
+
+from pickle import load
+
+with open('FileName.pk1', 'rb') as input_file:
+    loaded_data = load(input_file)
+
+*same notes

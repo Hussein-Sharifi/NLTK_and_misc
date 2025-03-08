@@ -1,0 +1,5 @@
+bigrams(text)
+trigrams(text)
+ngrams(text,n)
+
+obviously useful for AI sentence construction 

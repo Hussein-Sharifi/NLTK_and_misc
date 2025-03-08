@@ -1,0 +1,14 @@
+conda env list
+
+conda create envname
+
+conda activate my-env
+
+
+*python to open python
+
+after installing package: 	 import nltk
+to open content for downloading: nltk.download()
+
+from nltk.book import *
+

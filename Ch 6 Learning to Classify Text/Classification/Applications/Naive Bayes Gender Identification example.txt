@@ -1,0 +1,54 @@
+We're going to train a classifier to predict the gender of a name based on the last letter.
+
+def gender_features(word):
+    return {'last_letter': word[-1]}
+
+from nltk.corpus import names
+labeled_names = ( [(name, 'male') for name in names.words('male.txt')] + 
+					     [(name, 'female') for name in names.words('female.txt')] )
+import random
+random.shuffle(labeled_names)
+feature_set = [ ( gender_features(n), gender ) for n,gender in labeled_names]
+train_set, test_set = feature_set[:500], feature_set[500:]
+classifier = nltk.NaiveBayesClassifier.train(train_set)
+
+>>> classifier.classify(gender_features('Neo')), classifier.classify(gender_features('Zoe'))
+('male', 'female')
+>>> nltk.classify.accuracy(classifier, test_set)
+0.7414024717893606
+>>> classifier.show_most_informative_features(5)
+Most Informative Features
+             last_letter = 'r'              male : female =      7.7 : 1.0
+             last_letter = 't'              male : female =      7.2 : 1.0
+             last_letter = 'o'              male : female =      6.7 : 1.0
+             last_letter = 's'              male : female =      5.1 : 1.0
+             last_letter = 'd'              male : female =      4.3 : 1.0
+
+___________________________________________________________________________________________________________________
+
+*When working with large datasets, creating a feature_set takes up large amounts of memory. There is an nltk function
+that does this more efficiently:
+
+nltk.classify.apply_features(gender_features, labeled_names)
+
+
+___________________________________________________________________________________________________________________
+
+
+Takeaways:
+
+nltk.NaiveBayesClassifier.train(train_set)
+------------------------------------------
+has methods:
+classify(features)
+show_most_informative_features(n)
+
+
+
+nltk.classify.accuracy(classifier, test_set)
+--------------------------------------------
+
+
+
+nltk.classify.apply_features(gender_features, labeled_names)
+------------------------------------------------------------

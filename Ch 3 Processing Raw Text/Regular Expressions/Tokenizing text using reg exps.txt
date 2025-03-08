@@ -1,0 +1,16 @@
+re.findall(r"\w+(?:[-']\w+)*|'|[-.(]+|\S\w*", raw)
+
+
+\b	Word boundary (zero width)
+\d	Any decimal digit (equivalent to [0-9])
+\D	Any non-digit character (equivalent to [^0-9])
+\s	Any whitespace character (equivalent to [ \t\n\r\f\v])
+\S	Any non-whitespace character (equivalent to [^ \t\n\r\f\v])
+\w	Any alphanumeric character (equivalent to [a-zA-Z0-9_])
+\W	Any non-alphanumeric character (equivalent to [^a-zA-Z0-9_])
+\t	The tab character
+\n	The newline character
+
+\N{euro sign}
+\N{rupee sign}
+\N{pound sign}

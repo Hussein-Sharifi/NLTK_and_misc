@@ -1,0 +1,71 @@
+import re
+
+nltk.app.nemo(): app that lets you experiment with reg exps
+nltk.re_show(x, object), where x is the thing we're looking for: shows you what gets highlighted.
+
+re.findall(x,object). Using parentheses returns tuples: 
+>>> re.findall(r'^(.*?)(ing|ly|ed|ious|ies|ive|es|s|ment)$', 'processes')
+[('process', 'es')]
+
+$: matches end of string.
+^: matches start of string
+.: can be anything. called a wildcard
+?: preceding character is optional.
+
+\: bypasses function . eg: ^[0-9]+\.[0-9]+$: here the \ is bypassing the wildcard function and instead looks for '.' so we 
+													      get decimals
+|: or operator. eg: (ed|ing)$: words ending with ed or ing. 
+		eg:  ed|ing$: words containing ed or ending with ing.
+{}: specifies number of repetitions. egs: ^[0-9]{4}$: this means we're allowed to repeat [0-9] 4 times. great way to find 												years (1999, 2007, etc.)			         ^[0-9]+-[a-z]{3,5}$: [0-9] followed by - and a three-to-five letter word
+				    	   [a-z]{5,}: words 5 letters or longer. [a-z]{,6}: words 6 letters or shorter
+
+?=: In regular expressions, (?=...) is known as a positive lookahead. It checks for a specific pattern that must appear immediately after the current position in the string, without including that pattern in the actual match.
+		eg: r'\w+(?=n\'t)|n\'t|\w+') separates "don't" into "do" and "n't"
+
+[ghk]: constrains possibilities to g or h or k 
+[g-o]: all letters between g and o. eg: [a-fj-o] means any letter between a and f or between j and o
+[g-o]+: all letters between g and o, repeated however many instances
+[g-o]*: all letters between g and o, repeated however many instances or none at all.
+[^g-o]: anything that isn't g-o. eg: [^aeiouAEIOU] means no vowels
+
+
+egs: 
+
+wordlist = nltk.corpus.words.words('en')
+
+>>>[w for w in text if re.search('ed$', w)] finds all words ending with ed.
+ 
+>>>[w for w in wordlist if re.search('^..j..t..$', w)]
+['abjectly', 'adjuster', 'dejected', 'dejectly', 'injector', 'majestic', ...]
+
+>>>[w for w in wordlist if re.search('^[ghi][mno][jlk][def]$', w)]
+['gold', 'golf', 'hold', 'hole']
+
+>>> [w for w in wordlist if re.search('^o+', w)]
+all words starting with however many os
+
+[w for w in wordlist if re.search('^e-?mail$', w)] will match both email and e-mail
+
+
+Let's count total occurrences of something in a text:
+>>>sum(1 for w in text if re.search(___,w))
+
+>>> [w for w in wsj if re.search('^[a-z]{5,}-[a-z]{2,3}-[a-z]{,6}$', w)]
+['black-and-white', 'bread-and-butter', 'father-in-law', 'machine-gun-toting',
+'savings-and-loan']
+
+>>> [w for w in wsj if re.search('^[A-Z]+\$$', w)]
+['C$', 'US$']
+
+
+important eg.
+-------------
+>>>chat = sorted(w for w in nltk.corpus.nps_chat_words()))
+>>> [w for w in chat_words if re.search('^m+i+n+e$', w)]
+['miiiiiiiiiiiiinnnnnnnnnnneeeeeeeeee', 'miiiiiinnnnnnnnnneeeeeeee', 'mine',
+'mmmmmmmmiiiiiiiiinnnnnnnnneeeeeeee']
+
+>>> [w for w in chat_words if re.search('^[ha]+$', w)]
+['a', 'aaaaaaaaaaaaaaaaa', 'aaahhhh', 'ah', 'ahah', 'ahahah', 'ahh',
+'ahhahahaha', 'ahhh', 'ahhhh', 'ahhhhhh', 'ahhhhhhhhhhhhhh', 'h', 'ha', 'haaa',
+'hah', 'haha', 'hahaaa', 'hahah', 'hahaha', 'hahahaa', 'hahahah', 'hahahaha', ...]

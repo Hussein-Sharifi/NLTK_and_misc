@@ -1,0 +1,32 @@
+map(function, iterable): applies function to each item in iterable. use list(map) to display)
+
+filter(conditional, iterablee): returns elements for which the conditional is true. again, use list to display.
+
+sorted(object, key = function, reverse = "True"(optional))
+
+lambda input: function    : this is a quick way to define a function. It creates a nameless function that takes in x
+			    and applies the function to it.
+*you can also use lambda function without input: f = lambda: 'NOUN'; f() now just returns NOUN
+
+from operator import itemgetter
+itemgetter can sort by entry. For example second character or second entry in a tuple/list:
+check bottom example
+
+
+
+___________________________________________________________________________________________________________________
+Examples using lambda with each of these:
+
+sent = ['Take', 'care', 'of', 'the', 'sense', ',', 'and', 'the', 'sounds', 'will', 'take', 'care', 'of', 'themselves', '.']
+
+>>> sorted(sent, key = lambda x:len(x), reverse = 'True')
+['themselves', 'sounds', 'sense', 'Take', 'care', 'will', 'take', 'care', 'the', 'and', 'the', 'of', 'of', ',', '.']
+>>> list(map(lambda x: len(x), sent))
+[4, 4, 2, 3, 5, 1, 3, 3, 6, 4, 4, 4, 2, 10, 1]
+>>> list(filter(lambda x: len(x)>3, sent))
+['Take', 'care', 'sense', 'sounds', 'will', 'take', 'care', 'themselves']
+
+>>> words
+['here', 'is', 'abc', 'list', 'of', 'words']
+>>> sorted(words, key = itemgetter(1))
+['abc', 'here', 'of', 'list', 'words', 'at']

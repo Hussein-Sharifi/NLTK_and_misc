@@ -1,0 +1,15 @@
+list(nltk.bigrams(text))
+
+text.collocations(): sequences of words that often occur together
+
+text.concordance(string): occurrence of string within context
+
+text.similar(string)
+
+text.common_contexts(string1, string2)
+
+text.dispersion_plot(string1, string2, ...): plots occurrences of each string throughout text
+
+text.count(string)
+
+indexing step size: eg. 'hahahaha'[::2] = hhhh.  'hahahaha'[6:0:-2] gives 'hhh'

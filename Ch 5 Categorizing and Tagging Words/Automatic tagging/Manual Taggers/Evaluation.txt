@@ -1,0 +1,1 @@
+brown is 'gold standard' test data for tagging. it has been manually tagged by human experts, and tagging models are evaluated for accuracy relative to this corpus
